@@ -6,7 +6,8 @@
 
     <include layout="@layout/layout_toolbar" />
 
-    <TextView
+    <com.qw.library.widget.PullRecyclerView
+        android:id="@id/mPullRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="home" />

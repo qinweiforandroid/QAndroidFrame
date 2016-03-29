@@ -96,10 +96,7 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
             mLoadingView.setOnRetryListener(this);
             mLoadingView.notifyDataChanged(LoadingView.State.ing);
         }
-        String title = getIntent().getStringExtra(Constants.KEY_TITLE);
-        if (title != null) {
-            setTitle(title);
-        }
+        setTitle(getIntent().getStringExtra(Constants.KEY_TITLE));
     }
 
     /**
@@ -118,19 +115,6 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
 
     protected TextView mToolBarTitleLabel;
     protected Toolbar toolbar;
-    private CharSequence title;
-
-
-    @Override
-    public void setTitle(CharSequence title) {
-        this.title = title;
-        if (mToolBarTitleLabel != null && isCenter()) {
-            mToolBarTitleLabel.setText(title);
-            super.setTitle("");
-        } else {
-            super.setTitle(title);
-        }
-    }
 
 
     @Override
@@ -171,6 +155,16 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
     @Override
     public void onRetry() {
 
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        if (mToolBarTitleLabel != null && isCenter()) {
+            mToolBarTitleLabel.setText(title);
+            super.setTitle("");
+        } else {
+            super.setTitle(title);
+        }
     }
 }
 

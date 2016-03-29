@@ -7,4 +7,6 @@ package com.qw.frame.utils;
 public class Constants {
     public static final String KEY_PROTECT_APP ="key_protect_app" ;
     public static final java.lang.String KEY_TITLE = "key_title";
+    public static final java.lang.String KEY_CURRENT_TAB_INDEX = "key_current_tab_index";
+    public static final String KEY_TAB_ENTITIES = "key_tab_entities";
 }

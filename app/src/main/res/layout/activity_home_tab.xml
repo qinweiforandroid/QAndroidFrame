@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar"></include>
+
+    <FrameLayout
+        android:id="@id/mHomeContent"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <include layout="@layout/layout_line_black" />
+
+    <com.qw.library.widget.tab.TabIndicator
+        android:id="@+id/mHomeIndicator"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@color/tab_indicator_gray"
+        android:clickable="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
+</LinearLayout>

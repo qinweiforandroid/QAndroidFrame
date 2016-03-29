@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <item name="gridview" type="id" />
-    <item name="webview" type="id" />
-    <item name="scrollview" type="id" />
     <!-- ids -->
-    <item name="generalPullToRefreshLsv" type="id"></item>
-    <item name="generalRecyclerView" type="id"></item>
-    <item name="generalSwipeRefreshLayout" type="id"></item>
-    <item name="generalPullToRefreshGridView" type="id"></item>
-    <item name="generalPullToRefreshWaterFallLsv" type="id"></item>
-    <item name="generalFragmentPager" type="id"></item>
-    <item name="generalViewPager" type="id"></item>
-    <item name="generalSlidingpaneLayout" type="id"></item>
-    <item name="generalContent" type="id"></item>
-    <item name="generalMenu" type="id"></item>
-    <item name="generalTabIndicator" type="id"></item>
-    <!-- emptyView-->
-    <item name="mLoadingView" type="id"></item>
-    <item name="mViewSwitcher" type="id"></item>
+    <item name="generalPullToRefreshLsv" type="id" />
+    <item name="mPullRecyclerView" type="id" />
+    <item name="generalSwipeRefreshLayout" type="id" />
+    <item name="generalPullToRefreshGridView" type="id" />
+    <item name="generalPullToRefreshWaterFallLsv" type="id" />
+    <item name="generalFragmentPager" type="id" />
+    <item name="generalViewPager" type="id" />
+    <item name="generalContent" type="id" />
+    <item name="generalMenu" type="id" />
+    <item name="generalTabIndicator" type="id" />
+    <!-- LoadingView-->
+    <item name="mLoadingView" type="id" />
+    <item name="mViewSwitcher" type="id" />
+    <item name="mHomeContent" type="id" />
     <!-- title id -->
-    <item name="generalTitleLabel" type="id"></item>
-    <item name="generalTitleBackImg" type="id"></item>
-    <item name="generalTitleEdt" type="id"></item>
-
+    <item name="generalTitleLabel" type="id" />
     <!-- login id -->
-    <item name="mLoginUserNameEdt" type="id"></item>
-    <item name="mLoginPasswordEdt" type="id"></item>
-    <item name="mLoginBtn" type="id"></item>
-
+    <item name="mLoginUserNameEdt" type="id" />
+    <item name="mLoginPasswordEdt" type="id" />
+    <item name="mLoginBtn" type="id" />
 </resources>
