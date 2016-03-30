@@ -70,7 +70,7 @@ public class HomeBottomActivity extends BaseActivity implements TabIndicator.OnT
                 getSupportFragmentManager().beginTransaction().hide(oldFragment).commitAllowingStateLoss();
                 getSupportFragmentManager().beginTransaction().show(fragment).commitAllowingStateLoss();
             }
-            mHomeIndicator.onDataChanged(index, 0);
+//            mHomeIndicator.onDataChanged(index, 0);
             currentIndex = index;
         } catch (InstantiationException e) {
             e.printStackTrace();

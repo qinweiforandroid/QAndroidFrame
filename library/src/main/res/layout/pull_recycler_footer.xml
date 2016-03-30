@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <cn.wei.library.widget.FooterView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.qw.library.widget.FooterView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mFooterView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

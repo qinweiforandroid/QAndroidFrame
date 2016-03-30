@@ -1,0 +1,35 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_list"
+        android:orderInCategory="100"
+        android:title="list"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_gridview"
+        android:icon="@android:drawable/ic_menu_more"
+        android:orderInCategory="100"
+        android:title="gridview"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_staggered"
+        android:icon="@android:drawable/ic_menu_more"
+        android:orderInCategory="100"
+        android:title="StaggeredGrid"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_add"
+        android:icon="@android:drawable/ic_menu_more"
+        android:orderInCategory="100"
+        android:title="add"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_remove"
+        android:icon="@android:drawable/ic_menu_more"
+        android:orderInCategory="100"
+        android:title="remove"
+        app:showAsAction="never" />
+</menu>

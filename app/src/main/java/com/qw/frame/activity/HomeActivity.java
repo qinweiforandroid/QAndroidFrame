@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.qw.frame.R;
 import com.qw.frame.entity.ClassEntity;
-import com.qw.frame.support.BaseRecyclerRefreshViewActivity;
+import com.qw.frame.support.BasePullRecyclerViewActivity;
 import com.qw.frame.utils.Constants;
 import com.qw.library.adapter.QBaseRecyclerViewHolder;
 import com.qw.library.utils.ImageDisplay;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * Created by qinwei on 2016/3/28 14:59
  * email:qinwei_it@163.com
  */
-public class HomeActivity extends BaseRecyclerRefreshViewActivity {
+public class HomeActivity extends BasePullRecyclerViewActivity {
     @Override
     protected void setContentView() {
         setContentView(R.layout.activity_home);
@@ -58,7 +58,7 @@ public class HomeActivity extends BaseRecyclerRefreshViewActivity {
         @Override
         public void initializeData(int position) {
             clazz = (ClassEntity) modules.get(position);
-            ImageDisplay.getInstance().displayImage(clazz.getIcon(), mHomeItemIconImg, R.drawable.ic_launcher, R.drawable.ic_launcher);
+            ImageDisplay.getInstance().displayImage(clazz.getIcon(), mHomeItemIconImg);
             mHomeItemTitleLabel.setText(clazz.getTitle());
         }
 

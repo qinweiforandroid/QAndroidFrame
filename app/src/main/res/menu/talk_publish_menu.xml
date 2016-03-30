@@ -1,8 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/talk_action_add"
-        android:orderInCategory="100"
-        android:title="添加说说"
-        app:showAsAction="ifRoom"></item>
-</menu>

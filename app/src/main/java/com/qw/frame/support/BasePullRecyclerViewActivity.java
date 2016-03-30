@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by qinwei on 2015/10/26 13:51
  * email:qinwei_it@163.com
  */
-public abstract class BaseRecyclerRefreshViewActivity extends BaseActivity implements PullRecyclerView.OnPullRecyclerListener {
+public abstract class BasePullRecyclerViewActivity extends BaseActivity implements PullRecyclerView.OnPullRecyclerListener {
     private final int VIEW_TYPE_FOOTER = -2;
     private final int VIEW_TYPE_HEADER = -1;
     protected ArrayList<Object> modules = new ArrayList<>();
@@ -98,21 +98,18 @@ public abstract class BaseRecyclerRefreshViewActivity extends BaseActivity imple
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             if (VIEW_TYPE_FOOTER == viewType) {
-                View view = LayoutInflater.from(BaseRecyclerRefreshViewActivity.this).inflate(R.layout.pull_recycler_footer, parent, false);
+                View view = LayoutInflater.from(BasePullRecyclerViewActivity.this).inflate(R.layout.pull_recycler_footer, parent, false);
                 return new FooterViewHolder(view);
             } else if (viewType == VIEW_TYPE_HEADER) {
-                return new HeaderViewHolder(LayoutInflater.from(BaseRecyclerRefreshViewActivity.this).inflate(getHeaderViewId(), parent, false));
+                return new HeaderViewHolder(LayoutInflater.from(BasePullRecyclerViewActivity.this).inflate(getHeaderViewId(), parent, false));
             }
-            return BaseRecyclerRefreshViewActivity.this.onCreateViewHolder(parent, viewType);
+            return BasePullRecyclerViewActivity.this.onCreateViewHolder(parent, viewType);
         }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             QBaseRecyclerViewHolder h = (QBaseRecyclerViewHolder) holder;
-            if (isContainerHeader() && position != 0) {
-                if (!(isCanLoadMore() && position + 1 == getItemCount()))
-                    position--;
-            }
+            position = getNormalPosition(position);
             h.initializeData(position);
         }
 
@@ -123,7 +120,15 @@ public abstract class BaseRecyclerRefreshViewActivity extends BaseActivity imple
             } else if (isContainerHeader() && position == 0) {
                 return VIEW_TYPE_HEADER;
             }
-            return getAdapterItemViewType(position);
+            return getAdapterItemViewType(getNormalPosition(position));
+        }
+
+        public int getNormalPosition(int position) {
+            if (isContainerHeader() && position != 0) {
+                if (!(isCanLoadMore() && position + 1 == getItemCount()))
+                    position--;
+            }
+            return position;
         }
 
         @Override

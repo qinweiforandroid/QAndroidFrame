@@ -11,6 +11,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.qw.library.utils.IImageDisplay;
+import com.qw.library.utils.ImageDisplay;
 
 import java.io.File;
 
@@ -40,13 +41,13 @@ public class UniversalImageloaderDisplay implements IImageDisplay {
     }
 
     @Override
-    public void displayImage(String uri, ImageView imageView, int placeId, int errorId) {
-        ImageLoader.getInstance().displayImage(uri, imageView, getDisplayOptions(placeId, errorId));
+    public void displayImage(String uri, ImageView imageView, ImageDisplay.DisplayOptions options) {
+        ImageLoader.getInstance().displayImage(uri, imageView, getDisplayOptions(options.ingId, options.errorId));
     }
+
 
     @Override
     public void displayImage(int id, ImageView imageView) {
-//        ImageLoader.getInstance().displayImage("drawable://" + id, imageView);
         imageView.setImageResource(id);
     }
 
