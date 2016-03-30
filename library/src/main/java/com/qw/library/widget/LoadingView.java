@@ -6,12 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.qw.library.R;
 
 
 /**
- * emptyView解决了请求网络数据时ui显示的三种状态
+ * LoadingView解决了请求网络数据时ui显示的三种状态
  * 分别为加载中，加载失败，无数据
  * email: qinwei_it@163.com
  *
@@ -19,9 +20,9 @@ import com.qw.library.R;
  */
 public class LoadingView extends FrameLayout implements OnClickListener {
 
-    private View empty;
-    private View error;
-    private View loading;
+    private LinearLayout empty;
+    private LinearLayout error;
+    private LinearLayout loading;
     private State state;
     private OnRetryListener listener;
 
@@ -50,9 +51,9 @@ public class LoadingView extends FrameLayout implements OnClickListener {
 
     private void initializeView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.widget_loading_view, this);
-        empty = findViewById(R.id.empty);
-        loading = findViewById(R.id.loading);
-        error = findViewById(R.id.error);
+        empty = (LinearLayout) findViewById(R.id.empty);
+        loading = (LinearLayout) findViewById(R.id.loading);
+        error = (LinearLayout)findViewById(R.id.error);
         setOnClickListener(this);
         notifyDataChanged(State.ing);
     }
@@ -85,7 +86,10 @@ public class LoadingView extends FrameLayout implements OnClickListener {
                 break;
         }
     }
-
+    public void setEmptyView(View view) {
+        empty.removeAllViews();
+        empty.addView(view);
+    }
     public void setOnRetryListener(OnRetryListener listener) {
         this.listener = listener;
     }
