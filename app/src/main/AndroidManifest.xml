@@ -27,9 +27,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeBottomActivity"
-            android:screenOrientation="portrait" />
+           />
         <activity
-            android:name=".activity.PullRecyclerViewActivity"
+            android:name=".activity.PullRecyclerActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LoadingViewActivity"

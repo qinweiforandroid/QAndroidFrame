@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_toolbar"></include>
-
     <FrameLayout
         android:id="@id/mHomeContent"
         android:layout_width="fill_parent"
@@ -22,5 +20,4 @@
         android:clickable="true"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" />
-
 </LinearLayout>

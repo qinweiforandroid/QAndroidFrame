@@ -1,7 +1,6 @@
 package com.qw.frame.activity;
 
 import android.content.Intent;
-import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qw.frame.R;
+import com.qw.frame.core.BaseListActivity;
 import com.qw.frame.entity.ClassEntity;
-import com.qw.frame.support.BasePullRecyclerViewActivity;
 import com.qw.frame.utils.Constants;
-import com.qw.library.adapter.QBaseRecyclerViewHolder;
 import com.qw.library.utils.ImageDisplay;
+import com.qw.library.widget.pulltorefresh.QBaseViewHolder;
+import com.qw.library.widget.pulltorefresh.layout.MGridLayoutManager;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * Created by qinwei on 2016/3/28 14:59
  * email:qinwei_it@163.com
  */
-public class HomeActivity extends BasePullRecyclerViewActivity {
+public class HomeActivity extends BaseListActivity {
     @Override
     protected void setContentView() {
         setContentView(R.layout.activity_home);
@@ -30,29 +30,32 @@ public class HomeActivity extends BasePullRecyclerViewActivity {
     @Override
     protected void initializeData() {
         setTitle("主页");
-        mPullRecyclerView.setPullToRefreshEnabled(false);
+        mPullRecycler.setPullToRefreshEnabled(false);
         ArrayList<ClassEntity> datas = ClassEntity.getDatas();
         modules.addAll(datas);
         adapter.notifyDataSetChanged();
-        setLayoutManager(new GridLayoutManager(this, 2));
+        setLayoutManager(new MGridLayoutManager(this, 2));
     }
-
     @Override
-    public QBaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        QBaseRecyclerViewHolder holder = new ViewHolder(LayoutInflater.from(this).inflate(R.layout.activity_home_item, null));
+    protected QBaseViewHolder onCreateAdapterView(ViewGroup parent, int viewType) {
+        QBaseViewHolder holder = new ViewHolder(LayoutInflater.from(this).inflate(R.layout.activity_home_item, null));
         return holder;
     }
 
-    class ViewHolder extends QBaseRecyclerViewHolder implements View.OnClickListener {
+    class ViewHolder extends QBaseViewHolder implements View.OnClickListener {
         private ImageView mHomeItemIconImg;
         private TextView mHomeItemTitleLabel;
         private ClassEntity clazz;
 
         public ViewHolder(View view) {
             super(view);
-            mHomeItemIconImg = (ImageView) view.findViewById(R.id.mHomeItemIconImg);
-            mHomeItemTitleLabel = (TextView) view.findViewById(R.id.mHomeItemTitleLabel);
-            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void initializeView(View v) {
+            mHomeItemIconImg = (ImageView) v.findViewById(R.id.mHomeItemIconImg);
+            mHomeItemTitleLabel = (TextView) v.findViewById(R.id.mHomeItemTitleLabel);
+            v.setOnClickListener(this);
         }
 
         @Override
@@ -73,10 +76,9 @@ public class HomeActivity extends BasePullRecyclerViewActivity {
     }
 
     @Override
-    protected boolean isCanBack() {
+    protected boolean hasBackIcon() {
         return false;
     }
-
     @Override
     public void protectApp() {
         startActivity(new Intent(this, SplashActivity.class));

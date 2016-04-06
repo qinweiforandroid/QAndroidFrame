@@ -45,6 +45,7 @@ public class TabIndicator extends LinearLayout implements OnClickListener {
 		}
 		mTabSize = tabs.size();
 		TabView tab = null;
+		removeAllViews();
 		for (int i = 0; i < mTabSize; i++) {
 			tab = new TabView(getContext());
 			tab.setId(ID_PREFIX + i);

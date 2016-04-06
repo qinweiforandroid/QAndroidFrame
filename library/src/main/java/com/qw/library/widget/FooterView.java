@@ -12,38 +12,11 @@ import android.widget.TextView;
 import com.qw.library.R;
 
 
-public class FooterView extends LinearLayout implements OnClickListener {
-
+public class FooterView extends LinearLayout implements IFooterView, OnClickListener {
     private ProgressBar mProgressBar;
     private TextView mFooterLabel;
     public State state = State.done;
     private OnFooterViewListener listener;
-
-    public interface OnFooterViewListener {
-        /**
-         * 加载更多失败重试回调函数
-         */
-        void onRetryLoadMore();
-    }
-
-    public enum State {
-        /**
-         * 正在加载
-         */
-        ing,
-        /**
-         * 加载成功
-         */
-        done,
-        /**
-         * 加载失败
-         */
-        error,
-        /**
-         * 无数据
-         */
-        no_data
-    }
 
     public FooterView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -62,27 +35,16 @@ public class FooterView extends LinearLayout implements OnClickListener {
 
 
     private void initializeView(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_footer, this);
+        LayoutInflater.from(context).inflate(R.layout.widget_listview_refresh_footer, this);
         mProgressBar = (ProgressBar) findViewById(R.id.mProgressBar);
         mFooterLabel = (TextView) findViewById(R.id.mFooterLabel);
         this.setOnClickListener(this);
     }
 
-
-    public boolean isCanBeLoadMore() {
-        switch (state) {
-            case done:
-            case error:
-                return true;
-            default:
-                return false;
-        }
-    }
-
     /**
      * update footerView UI
      *
-     * @param status footerView state
+     * @param status footerView mCurrentState
      */
     public void notifyDataChanged(State status) {
         this.state = status;

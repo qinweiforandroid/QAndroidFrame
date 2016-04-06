@@ -1,4 +1,4 @@
-package com.qw.frame.support;
+package com.qw.frame.core;
 
 import android.content.Context;
 import android.os.Bundle;

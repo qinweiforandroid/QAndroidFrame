@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import android.widget.ViewSwitcher;
 
 import com.qw.frame.R;
-import com.qw.frame.support.BaseActivity;
+import com.qw.frame.core.BaseActivity;
 import com.qw.library.widget.LoadingView;
 
 

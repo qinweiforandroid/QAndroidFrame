@@ -4,9 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_toolbar"></include>
-
-    <com.qw.library.widget.PullRecyclerView
+    <com.qw.library.widget.pulltorefresh.PullRecyclerView
         android:id="@id/mPullRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
