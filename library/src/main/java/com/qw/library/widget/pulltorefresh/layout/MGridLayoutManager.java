@@ -5,14 +5,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
-import com.qw.library.utils.Trace;
 import com.qw.library.widget.pulltorefresh.BaseListAdapter;
 
 /**
  * Created by qinwei on 2016/4/6 15:09
  * email:qinwei_it@163.com
  */
-public class MGridLayoutManager extends GridLayoutManager implements ILayoutManager{
+public class MGridLayoutManager extends GridLayoutManager implements ILayoutManager {
     public MGridLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -37,11 +36,10 @@ public class MGridLayoutManager extends GridLayoutManager implements ILayoutMana
 
     @Override
     public void setAdapter(final BaseListAdapter adapter) {
-        setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
+        setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                Trace.e("getSpanSize:"+position);
-                if(adapter.isLoadMoreFooter(position)||adapter.isGroupHeader(position)){
+                if (adapter.isLoadMoreFooter(position) || adapter.isGroupHeader(position)) {
                     return getSpanCount();
                 }
                 return 1;

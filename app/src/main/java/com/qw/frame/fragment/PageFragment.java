@@ -1,6 +1,8 @@
 package com.qw.frame.fragment;
 
+import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.qw.frame.R;
 import com.qw.frame.core.BaseFragment;
@@ -10,6 +12,17 @@ import com.qw.frame.core.BaseFragment;
  * email:qinwei_it@163.com
  */
 public class PageFragment extends BaseFragment {
+    private TextView mContentLabel;
+    private String pageTitle;
+
+    public static BaseFragment getInstance(String pageTitle) {
+        PageFragment fragment = new PageFragment();
+        Bundle args = new Bundle();
+        args.putString("pageTitle", pageTitle);
+        args.putBoolean(KEY_IS_BIND_VIEWPAGER, true);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     protected int getFragmentLayoutId() {
@@ -17,7 +30,19 @@ public class PageFragment extends BaseFragment {
     }
 
     @Override
-    protected void initializeView(View v) {
+    protected void initializeArguments(Bundle args) {
+        super.initializeArguments(args);
+        pageTitle = args.getString("pageTitle");
+    }
 
+    @Override
+    protected void initializeView(View v) {
+        mContentLabel = (TextView) v.findViewById(R.id.mContentLabel);
+        mContentLabel.setText("" + System.currentTimeMillis());
+    }
+
+    @Override
+    protected void initializeData() {
+        mContentLabel.setText(pageTitle);
     }
 }

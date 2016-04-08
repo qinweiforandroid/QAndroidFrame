@@ -29,10 +29,16 @@
             android:name=".activity.HomeBottomActivity"
            />
         <activity
+            android:name=".activity.HomeViewPagerActivity"
+           />
+        <activity
             android:name=".activity.PullRecyclerActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LoadingViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CheeseDetailActivity"
             android:screenOrientation="portrait" />
     </application>
 

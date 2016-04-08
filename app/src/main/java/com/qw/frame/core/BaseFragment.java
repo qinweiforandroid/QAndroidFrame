@@ -20,16 +20,17 @@ import com.qw.library.widget.LoadingView;
  * @created 创建时间: 2015-8-22 下午7:07:47
  */
 public abstract class BaseFragment extends Fragment implements LoadingView.OnRetryListener {
-    private View view;
+    public static final String KEY_IS_BIND_VIEWPAGER = "key_is_bind_viewpager";
     protected LoadingView mLoadingView;
-    protected boolean isFirstLoad = true;
+    private boolean isFirstLoad = true;
+    private boolean isOnViewCreated = false;
+    private boolean isBindViewPager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null)
             initializeArguments(getArguments());
-        }
     }
 
     /**
@@ -38,7 +39,9 @@ public abstract class BaseFragment extends Fragment implements LoadingView.OnRet
      * @param args 配置参数
      */
     protected void initializeArguments(Bundle args) {
-
+        if (args != null) {
+            isBindViewPager = args.getBoolean(KEY_IS_BIND_VIEWPAGER, false);
+        }
     }
 
     @Override
@@ -48,18 +51,8 @@ public abstract class BaseFragment extends Fragment implements LoadingView.OnRet
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(getFragmentLayoutId(), container, false);
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        if (view.findViewById(R.id.mLoadingView) != null) {
-            mLoadingView = (LoadingView) view.findViewById(R.id.mLoadingView);
-            mLoadingView.setOnRetryListener(this);
-            mLoadingView.notifyDataChanged(LoadingView.State.ing);
-        }
-        initializeView(view);
+        Trace.e("onCreateView");
+        return inflater.inflate(getFragmentLayoutId(), container, false);
     }
 
     protected abstract int getFragmentLayoutId();
@@ -67,8 +60,37 @@ public abstract class BaseFragment extends Fragment implements LoadingView.OnRet
     protected abstract void initializeView(View v);
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Trace.e("onViewCreated");
+        isOnViewCreated = true;
+        if (view.findViewById(R.id.mLoadingView) != null) {
+            mLoadingView = (LoadingView) view.findViewById(R.id.mLoadingView);
+            mLoadingView.setOnRetryListener(this);
+            mLoadingView.notifyDataChanged(LoadingView.State.ing);
+        }
+        initializeView(view);
+        if (!isBindViewPager) {
+            initializeData();
+        }
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Trace.d(this.getClass().getSimpleName() + " " + isVisibleToUser + "");
+        if (isFirstLoad && isVisibleToUser && isOnViewCreated) {
+            initializeData();
+            isFirstLoad = false;
+        }
+    }
+
+    protected void initializeData() {
     }
 
     @Override
@@ -92,19 +114,6 @@ public abstract class BaseFragment extends Fragment implements LoadingView.OnRet
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isFirstLoad && isVisibleToUser) {
-            lazyLoad();
-            isFirstLoad = false;
-        }
-        Trace.d(this.getClass().getSimpleName(), isVisibleToUser + "");
-    }
-
-    protected void lazyLoad() {
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
@@ -112,10 +121,6 @@ public abstract class BaseFragment extends Fragment implements LoadingView.OnRet
     @Override
     public void onDestroy() {
         super.onDestroy();
-    }
-
-    public View getCurrentView() {
-        return view;
     }
 
     @Override

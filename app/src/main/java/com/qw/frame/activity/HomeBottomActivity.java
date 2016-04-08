@@ -85,7 +85,7 @@ public class HomeBottomActivity extends BaseActivity implements TabIndicator.OnT
     @Override
     protected void recoveryState(Bundle saveInstance) {
         tabs = (ArrayList<Tab>) saveInstance.getSerializable(Constants.KEY_TAB_ENTITIES);
-        Trace.e(tabs.size()+"");
+        Trace.e(tabs.size() + "");
         mHomeIndicator.initializeData(tabs);
         currentIndex = saveInstance.getInt(Constants.KEY_CURRENT_TAB_INDEX);
         for (int i = 0; i < tabs.size(); i++) {

@@ -44,7 +44,6 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
         }
     }
 
-
     public void protectApp() {
         Log.e(TAG, "protectApp:class=" + this.getClass().getSimpleName());
         Intent intent = new Intent(this, HomeActivity.class);
@@ -87,7 +86,8 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
      *
      * @param saveInstance 状态数据
      */
-    protected void recoveryState(Bundle saveInstance) {}
+    protected void recoveryState(Bundle saveInstance) {
+    }
 
     /**
      * 3. 初始化ui数据
@@ -121,7 +121,8 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
     }
 
     @Override
-    public void onRetry() {}
+    public void onRetry() {
+    }
 
     @Override
     public void setTitle(CharSequence title) {
