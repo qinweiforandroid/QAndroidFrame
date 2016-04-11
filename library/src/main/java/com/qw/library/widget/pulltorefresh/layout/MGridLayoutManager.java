@@ -39,7 +39,7 @@ public class MGridLayoutManager extends GridLayoutManager implements ILayoutMana
         setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if (adapter.isLoadMoreFooter(position) || adapter.isGroupHeader(position)) {
+                if (adapter.isLoadMoreFooter(position) || adapter.isGroupHeader(position)||adapter.isHeaderView(position)) {
                     return getSpanCount();
                 }
                 return 1;

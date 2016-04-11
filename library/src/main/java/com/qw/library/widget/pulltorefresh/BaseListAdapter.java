@@ -43,7 +43,7 @@ public abstract class BaseListAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (isLoadMoreFooter(position)) {
+        if (isLoadMoreFooter(position)||isHeaderView(position)) {
             if (holder.itemView.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams) {
                 StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
                 params.setFullSpan(true);
@@ -135,7 +135,7 @@ public abstract class BaseListAdapter extends RecyclerView.Adapter {
     public boolean isLoadMoreFooter(int position) {
         return isLoadMoreShown && position == getItemCount() - 1;
     }
-    protected  boolean isHeaderView(int position){
+    public  boolean isHeaderView(int position){
         return isHeaderViewShow&&position==0;
     }
     public boolean isGroupHeader(int position) {
