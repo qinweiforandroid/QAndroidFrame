@@ -12,8 +12,6 @@ import com.qw.frame.core.BaseFragment;
  */
 public class MainFragment extends BaseFragment {
     private TextView mContentLabel;
-
-
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_main;

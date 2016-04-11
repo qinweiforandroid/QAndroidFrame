@@ -1,6 +1,8 @@
 package com.qw.frame.core;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.qw.frame.R;
@@ -32,6 +34,7 @@ public abstract class BaseListActivity extends BaseActivity implements PullRecyc
         mPullRecycler.setLayoutManager(getLayoutManager());
         mPullRecycler.setOnPullRecyclerListener(this);
         adapter = new ListAdapter();
+        adapter.isHeaderViewShow=getHeaderLayoutId()!=-1;
         mPullRecycler.setAdapter(adapter);
     }
     public void setLayoutManager(ILayoutManager manager){
@@ -47,7 +50,20 @@ public abstract class BaseListActivity extends BaseActivity implements PullRecyc
         return false;
     }
 
+    public int getHeaderLayoutId(){
+        return -1;
+    }
+    protected void initializeHeaderView(View v){
+
+    }
+
     class ListAdapter extends BaseListAdapter {
+        @Override
+        protected QBaseViewHolder onCreateHeaderView(LayoutInflater from, ViewGroup parent) {
+            QBaseViewHolder holder=new HeaderHolder(from.inflate(getHeaderLayoutId(),parent,false));
+            return holder;
+        }
+
         @Override
         protected int getItemAdapterCount() {
             return modules.size();
@@ -69,6 +85,17 @@ public abstract class BaseListActivity extends BaseActivity implements PullRecyc
         }
     }
 
+    private class HeaderHolder extends QBaseViewHolder{
+
+        public HeaderHolder(View itemView) {
+            super(itemView);
+        }
+        @Override
+        public void initializeView(View v) {
+            setIsRecyclable(false);
+            initializeHeaderView(v);
+        }
+    }
     protected abstract QBaseViewHolder onCreateAdapterView(ViewGroup parent, int viewType);
 
     protected int getAdapterItemViewType(int position) {

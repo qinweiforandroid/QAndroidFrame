@@ -17,19 +17,24 @@ import com.qw.library.widget.OnFooterViewListener;
  */
 public abstract class BaseListAdapter extends RecyclerView.Adapter {
     public static final int VIEW_TYPE_LOAD_MORE_FOOTER = 1000;
+    private static final int VIEW_TYPE_HEADER = 2000;
     public boolean isLoadMoreShown;
+    public boolean isHeaderViewShow;
     protected IFooterView.State state = IFooterView.State.done;
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         QBaseViewHolder holder;
         if (viewType == VIEW_TYPE_LOAD_MORE_FOOTER) {
             holder = onCreateLoadMoreFooter(LayoutInflater.from(parent.getContext()), parent);
+        }else if(viewType==VIEW_TYPE_HEADER){
+            holder=onCreateHeaderView(LayoutInflater.from(parent.getContext()), parent);
         } else {
             holder = onCreateAdapterView(parent, viewType);
         }
         return holder;
     }
+
+    protected abstract QBaseViewHolder onCreateHeaderView(LayoutInflater from, ViewGroup parent);
 
     protected QBaseViewHolder onCreateLoadMoreFooter(LayoutInflater from, ViewGroup parent) {
 
@@ -44,22 +49,31 @@ public abstract class BaseListAdapter extends RecyclerView.Adapter {
                 params.setFullSpan(true);
             }
         }
+        if(isHeaderViewShow){
+            position--;
+        }
         QBaseViewHolder h = (QBaseViewHolder) holder;
         h.initializeData(position);
     }
 
     @Override
     public int getItemCount() {
-        return getItemAdapterCount() + (isLoadMoreShown ? 1 : 0);
+
+        return getItemAdapterCount() + (isLoadMoreShown ? 1 : 0)+ (isHeaderViewShow ? 1 : 0);
     }
 
     @Override
     public int getItemViewType(int position) {
         if (isLoadMoreFooter(position)) {
             return VIEW_TYPE_LOAD_MORE_FOOTER;
+        }else if(isHeaderView(position)){
+            return VIEW_TYPE_HEADER;
         }
         return getAdapterItemViewType(position);
     }
+
+
+
 
     protected abstract int getItemAdapterCount();
 
@@ -121,7 +135,9 @@ public abstract class BaseListAdapter extends RecyclerView.Adapter {
     public boolean isLoadMoreFooter(int position) {
         return isLoadMoreShown && position == getItemCount() - 1;
     }
-
+    protected  boolean isHeaderView(int position){
+        return isHeaderViewShow&&position==0;
+    }
     public boolean isGroupHeader(int position) {
         return false;
     }

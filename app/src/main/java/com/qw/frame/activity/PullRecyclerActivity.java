@@ -91,6 +91,21 @@ public class PullRecyclerActivity extends BaseListActivity {
     }
 
     @Override
+    public int getHeaderLayoutId() {
+        return R.layout.layout_header;
+    }
+
+    @Override
+    protected void initializeHeaderView(View v) {
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_recyclerview_swiperefresh_layout_mode, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_list:
@@ -123,11 +138,7 @@ public class PullRecyclerActivity extends BaseListActivity {
         setLayoutManager(lm);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_recyclerview_swiperefresh_layout_mode, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+
     @Override
     protected boolean isLoadMoreEnabled() {
         return true;
