@@ -87,6 +87,7 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
      * @param saveInstance 状态数据
      */
     protected void recoveryState(Bundle saveInstance) {
+        initializeData();
     }
 
     /**

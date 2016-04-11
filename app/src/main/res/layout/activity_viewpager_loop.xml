@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.qw.library.widget.loop.LoopViewPager
+        android:id="@+id/mLoopViewPager"
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <com.qw.library.widget.indicator.CirclePageIndicator
+        android:layout_gravity="bottom"
+        android:padding="8dp"
+        android:id="@+id/mCirclePageIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</FrameLayout>

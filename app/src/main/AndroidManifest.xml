@@ -25,12 +25,8 @@
             android:name=".activity.HomeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.HomeBottomActivity"
-           />
-        <activity
-            android:name=".activity.HomeViewPagerActivity"
-           />
+        <activity android:name=".activity.HomeBottomActivity" />
+        <activity android:name=".activity.HomeViewPagerActivity" />
         <activity
             android:name=".activity.PullRecyclerActivity"
             android:screenOrientation="portrait" />
@@ -39,6 +35,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.CheeseDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoopViewPagerActivity"
             android:screenOrientation="portrait" />
     </application>
 
