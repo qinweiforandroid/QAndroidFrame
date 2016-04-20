@@ -1,6 +1,7 @@
 package com.qw.frame.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class HomeActivity extends BaseListActivity {
     }
 
     @Override
-    protected void initializeData() {
+    protected void initializeData(Bundle saveInstance) {
         setTitle("主页");
         mPullRecycler.setPullToRefreshEnabled(false);
         ArrayList<ClassEntity> datas = ClassEntity.getDatas();
@@ -36,6 +37,7 @@ public class HomeActivity extends BaseListActivity {
         adapter.notifyDataSetChanged();
         setLayoutManager(new MGridLayoutManager(this, 2));
     }
+
     @Override
     protected QBaseViewHolder onCreateAdapterView(ViewGroup parent, int viewType) {
         QBaseViewHolder holder = new ViewHolder(LayoutInflater.from(this).inflate(R.layout.activity_home_item, null));
@@ -79,6 +81,7 @@ public class HomeActivity extends BaseListActivity {
     protected boolean hasBackIcon() {
         return false;
     }
+
     @Override
     public void protectApp() {
         startActivity(new Intent(this, SplashActivity.class));

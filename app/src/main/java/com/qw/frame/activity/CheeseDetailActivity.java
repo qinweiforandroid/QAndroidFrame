@@ -17,6 +17,7 @@
 package com.qw.frame.activity;
 
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.view.Menu;
 import android.view.WindowManager;
@@ -45,10 +46,9 @@ public class CheeseDetailActivity extends BaseActivity {
     }
 
     @Override
-    protected void initializeData() {
+    protected void initializeData(Bundle saveInstance) {
         loadBackdrop();
     }
-
 
     private void loadBackdrop() {
         final ImageView imageView = (ImageView) findViewById(R.id.backdrop);

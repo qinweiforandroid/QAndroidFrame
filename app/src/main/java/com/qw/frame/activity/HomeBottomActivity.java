@@ -7,8 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.qw.frame.R;
-import com.qw.frame.fragment.PageFragment;
 import com.qw.frame.core.BaseActivity;
+import com.qw.frame.fragment.PageFragment;
 import com.qw.frame.utils.Constants;
 import com.qw.library.utils.Trace;
 import com.qw.library.widget.tab.Tab;
@@ -39,15 +39,26 @@ public class HomeBottomActivity extends BaseActivity implements TabIndicator.OnT
     }
 
     @Override
-    protected void initializeData() {
-        tabs = new ArrayList<Tab>();
-        tabs.add(new Tab("首页", R.drawable.tab_inquiry_btn, PageFragment.class));
-        tabs.add(new Tab("资讯", R.drawable.tab_casehistory_btn, PageFragment.class));
-        tabs.add(new Tab("发现", R.drawable.tab_community_btn, PageFragment.class));
-        tabs.add(new Tab("个人", R.drawable.tab_mine_btn, PageFragment.class));
+    protected void initializeData(Bundle saveInstance) {
+        if (saveInstance != null) {
+            tabs = (ArrayList<Tab>) saveInstance.getSerializable(Constants.KEY_TAB_ENTITIES);
+            Trace.e(tabs.size() + "");
+            currentIndex = saveInstance.getInt(Constants.KEY_CURRENT_TAB_INDEX);
+            for (int i = 0; i < tabs.size(); i++) {
+                if (getSupportFragmentManager().findFragmentByTag("" + i) != null)
+                    getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("" + i)).commitAllowingStateLoss();
+            }
+        } else {
+            tabs = new ArrayList<Tab>();
+            tabs.add(new Tab("首页", R.drawable.tab_inquiry_btn, PageFragment.class));
+            tabs.add(new Tab("资讯", R.drawable.tab_casehistory_btn, PageFragment.class));
+            tabs.add(new Tab("发现", R.drawable.tab_community_btn, PageFragment.class));
+            tabs.add(new Tab("个人", R.drawable.tab_mine_btn, PageFragment.class));
+        }
         mHomeIndicator.initializeData(tabs);
-        switchTab(0);
+        switchTab(currentIndex);
     }
+
 
     public void switchTab(int index) {
         mHomeIndicator.setCurrentTab(index);
@@ -80,19 +91,6 @@ public class HomeBottomActivity extends BaseActivity implements TabIndicator.OnT
         }
         setTitle(tabs.get(index).getLabel());
         return true;
-    }
-
-    @Override
-    protected void recoveryState(Bundle saveInstance) {
-        tabs = (ArrayList<Tab>) saveInstance.getSerializable(Constants.KEY_TAB_ENTITIES);
-        Trace.e(tabs.size() + "");
-        mHomeIndicator.initializeData(tabs);
-        currentIndex = saveInstance.getInt(Constants.KEY_CURRENT_TAB_INDEX);
-        for (int i = 0; i < tabs.size(); i++) {
-            if (getSupportFragmentManager().findFragmentByTag("" + i) != null)
-                getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager().findFragmentByTag("" + i)).commitAllowingStateLoss();
-        }
-        mHomeIndicator.setCurrentTab(currentIndex);
     }
 
     @Override

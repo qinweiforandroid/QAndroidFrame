@@ -1,68 +1,44 @@
 package com.qw.frame.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 
 import com.qw.frame.R;
-import com.qw.frame.core.BaseActivity;
+import com.qw.frame.core.BaseViewPagerActivity;
 import com.qw.frame.fragment.MainFragment;
 import com.qw.frame.fragment.PageFragment;
 import com.qw.library.utils.Trace;
 import com.qw.library.widget.tab.Tab;
 import com.qw.library.widget.tab.TabIndicator;
 
-import java.util.ArrayList;
-
 /**
  * Created by qinwei on 2016/4/6 18:21
  * email:qinwei_it@163.com
  */
-public class HomeViewPagerActivity extends BaseActivity implements ViewPager.OnPageChangeListener, TabIndicator.OnTabClickListener {
-    private HomePageAdapter adapter;
-    private ArrayList<Tab> tabs = new ArrayList<>();
+public class HomeViewPagerActivity extends BaseViewPagerActivity<Tab> implements TabIndicator.OnTabClickListener {
+    private TabIndicator generalTabIndicator;
 
     @Override
     protected void setContentView() {
         setContentView(R.layout.activity_home_tab_viewpager);
     }
 
-    private ViewPager generalViewPager;
-    private TabIndicator generalTabIndicator;
-
     @Override
     protected void initializeView() {
         super.initializeView();
         generalTabIndicator = (TabIndicator) findViewById(R.id.generalTabIndicator);
-        generalViewPager = (ViewPager) findViewById(R.id.generalViewPager);
-        generalViewPager.addOnPageChangeListener(this);
-        generalViewPager.setOffscreenPageLimit(4);
         generalTabIndicator.setOnTabClickListener(this);
     }
 
     @Override
-    protected void initializeData() {
-        tabs.add(new Tab("首页", R.drawable.tab_inquiry_btn, MainFragment.class));
-        tabs.add(new Tab("资讯", R.drawable.tab_casehistory_btn, PageFragment.class));
-        tabs.add(new Tab("发现", R.drawable.tab_community_btn, PageFragment.class));
-        tabs.add(new Tab("个人", R.drawable.tab_mine_btn, PageFragment.class));
-        adapter = new HomePageAdapter(getSupportFragmentManager());
-        generalViewPager.setAdapter(adapter);
-        generalTabIndicator.initializeData(tabs);
-//        generalViewPager.setCurrentItem(0);
+    protected void initializeData(Bundle saveInstance) {
+        modules.add(new Tab("首页", R.drawable.tab_inquiry_btn, MainFragment.class));
+        modules.add(new Tab("资讯", R.drawable.tab_casehistory_btn, PageFragment.class));
+        modules.add(new Tab("发现", R.drawable.tab_community_btn, PageFragment.class));
+        modules.add(new Tab("个人", R.drawable.tab_mine_btn, PageFragment.class));
+        notifyDataSetChanged();
+        generalTabIndicator.initializeData(modules);
         generalTabIndicator.setCurrentTab(0);
-    }
-
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
     }
 
     @Override
@@ -71,6 +47,7 @@ public class HomeViewPagerActivity extends BaseActivity implements ViewPager.OnP
         generalTabIndicator.setCurrentTab(position);
     }
 
+
     @Override
     public boolean onTabClick(int index) {
         Trace.e("onTabClick " + index);
@@ -78,23 +55,6 @@ public class HomeViewPagerActivity extends BaseActivity implements ViewPager.OnP
         return true;
     }
 
-
-    class HomePageAdapter extends FragmentStatePagerAdapter {
-
-        public HomePageAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return getFragmentAtPosition(position);
-        }
-
-        @Override
-        public int getCount() {
-            return tabs.size();
-        }
-    }
 
     /**
      * 获取所有底部tab图片资源

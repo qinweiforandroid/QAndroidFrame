@@ -1,5 +1,6 @@
 package com.qw.frame.activity;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,8 +39,9 @@ public class PullRecyclerActivity extends BaseListActivity {
     protected void initializeView() {
         super.initializeView();
     }
+
     @Override
-    protected void initializeData() {
+    protected void initializeData(Bundle saveInstance) {
         setTitle("RecyclerRefreshView");
         modules.add("http://f.hiphotos.baidu.com/image/h%3D360/sign=967a27edcf80653864eaa215a7dca115/8cb1cb1349540923d83dc1dd9758d109b3de4938.jpg");
         modules.add("http://g.hiphotos.baidu.com/image/h%3D360/sign=b6b75d1360380cd7f91ea4eb9145ad14/ca1349540923dd54508705cbd409b3de9d824898.jpg");
@@ -55,19 +57,22 @@ public class PullRecyclerActivity extends BaseListActivity {
         modules.add("http://c.hiphotos.baidu.com/image/h%3D360/sign=c1bb2ce88f1001e9513c1209880f7b06/a71ea8d3fd1f4134f57d607f271f95cad1c85e6c.jpg");
         adapter.notifyDataSetChanged();
     }
+
     @Override
     public void onRefresh(PullRecyclerView.State state) {
         if (state == PullRecyclerView.State.PULL_TO_START) {
             handler.sendEmptyMessageDelayed(0, 3000);
-        }else{
+        } else {
             handler.sendEmptyMessageDelayed(1, 3000);
         }
     }
+
     @Override
     protected QBaseViewHolder onCreateAdapterView(ViewGroup parent, int viewType) {
         QBaseViewHolder holder = new ViewHolder(LayoutInflater.from(this).inflate(R.layout.activity_pullrecyclerview_item, null));
         return holder;
     }
+
     class ViewHolder extends QBaseViewHolder {
         private ImageView mHomeItemIconImg;
         private TextView mHomeItemTitleLabel;
@@ -105,6 +110,7 @@ public class PullRecyclerActivity extends BaseListActivity {
         getMenuInflater().inflate(R.menu.menu_recyclerview_swiperefresh_layout_mode, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -134,7 +140,7 @@ public class PullRecyclerActivity extends BaseListActivity {
     }
 
     private void setGridLayoutManager() {
-         MGridLayoutManager lm = new MGridLayoutManager(this, 2);
+        MGridLayoutManager lm = new MGridLayoutManager(this, 2);
         setLayoutManager(lm);
     }
 
@@ -148,6 +154,7 @@ public class PullRecyclerActivity extends BaseListActivity {
     public boolean isPullToRefreshEnabled() {
         return true;
     }
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

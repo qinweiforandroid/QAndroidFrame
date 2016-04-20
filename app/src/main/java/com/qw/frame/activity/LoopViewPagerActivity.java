@@ -1,5 +1,6 @@
 package com.qw.frame.activity;
 
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import com.qw.library.widget.loop.LoopViewPager;
  * Created by qinwei on 2016/4/11 14:24
  * email:qinwei_it@163.com
  */
-public class LoopViewPagerActivity extends BaseActivity  {
+public class LoopViewPagerActivity extends BaseActivity {
     private LoopViewPager mLoopViewPager;
     private DataPagerAdapter adapter;
     private CirclePageIndicator mCirclePageIndicator;
@@ -28,19 +29,17 @@ public class LoopViewPagerActivity extends BaseActivity  {
     protected void initializeView() {
         super.initializeView();
         mLoopViewPager = (LoopViewPager) findViewById(R.id.mLoopViewPager);
-        mCirclePageIndicator=(CirclePageIndicator)findViewById(R.id.mCirclePageIndicator);
+        mCirclePageIndicator = (CirclePageIndicator) findViewById(R.id.mCirclePageIndicator);
     }
 
     @Override
-    protected void initializeData() {
+    protected void initializeData(Bundle saveInstance) {
         adapter = new DataPagerAdapter();
         mLoopViewPager.setOffscreenPageLimit(2);
         mLoopViewPager.setAdapter(adapter);
         mCirclePageIndicator.setViewPager(mLoopViewPager);
         mLoopViewPager.startAutoScroll();
     }
-
-
 
     class DataPagerAdapter extends PagerAdapter {
 

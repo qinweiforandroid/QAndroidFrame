@@ -1,6 +1,7 @@
 package com.qw.frame.activity;
 
 
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ViewSwitcher;
@@ -21,14 +22,12 @@ public class LoadingViewActivity extends BaseActivity implements LoadingView.OnR
     }
 
     @Override
-    protected void initializeData() {
+    protected void initializeData(Bundle saveInstance) {
         mLoadingView = (LoadingView) findViewById(R.id.mLoadingView);
         mLoadingView.setOnRetryListener(this);
         mLoadingView.notifyDataChanged(LoadingView.State.ing);
         mViewSwitcher = (ViewSwitcher) findViewById(R.id.mViewSwitcher);
         mViewSwitcher.setDisplayedChild(0);
-        // 切换到下一个
-        // bottom.showNext()
     }
 
     @Override

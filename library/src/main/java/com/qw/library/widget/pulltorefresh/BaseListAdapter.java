@@ -58,7 +58,6 @@ public abstract class BaseListAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-
         return getItemAdapterCount() + (isLoadMoreShown ? 1 : 0)+ (isHeaderViewShow ? 1 : 0);
     }
 
@@ -71,10 +70,6 @@ public abstract class BaseListAdapter extends RecyclerView.Adapter {
         }
         return getAdapterItemViewType(position);
     }
-
-
-
-
     protected abstract int getItemAdapterCount();
 
     public abstract QBaseViewHolder onCreateAdapterView(ViewGroup parent, int viewType);

@@ -34,11 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
         if (!MyApplication.getInstance().isAppKilled()) {
             setContentView();
             initializeView();
-            if (saveInstance != null) {
-                recoveryState(saveInstance);
-            } else {
-                initializeData();
-            }
+            initializeData(saveInstance);
         } else {
             protectApp();
         }
@@ -82,18 +78,9 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
     }
 
     /**
-     * 界面被系统强杀 数据状态恢复
-     *
-     * @param saveInstance 状态数据
-     */
-    protected void recoveryState(Bundle saveInstance) {
-        initializeData();
-    }
-
-    /**
      * 3. 初始化ui数据
      */
-    protected abstract void initializeData();
+    protected abstract void initializeData(Bundle saveInstance);
 
 
     @Override
