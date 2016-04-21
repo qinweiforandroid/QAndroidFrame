@@ -142,6 +142,9 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
     }
 
     @Override
+    protected void onRestart() { super.onRestart(); }
+
+    @Override
     protected void onResume() {
         super.onResume();
     }

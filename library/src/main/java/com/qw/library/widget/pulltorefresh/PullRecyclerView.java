@@ -15,7 +15,7 @@ import com.qw.library.widget.pulltorefresh.layout.ILayoutManager;
  * Created by qinwei on 2016/4/6 14:17
  * email:qinwei_it@163.com
  */
-public class PullRecyclerView extends LinearLayout  {
+public class PullRecyclerView extends LinearLayout {
     private boolean isPullToRefhreshEnabled = true;
     private boolean isLoadMoreEnabled = false;
     private BaseListAdapter adapter;
@@ -93,7 +93,7 @@ public class PullRecyclerView extends LinearLayout  {
     public void setLayoutManager(ILayoutManager manager) {
         this.layoutManager = manager;
         mRecyclerView.setLayoutManager(manager.getLayoutManager());
-        if(adapter!=null){
+        if (adapter != null) {
             layoutManager.setAdapter(adapter);
         }
     }
@@ -114,8 +114,14 @@ public class PullRecyclerView extends LinearLayout  {
     }
 
     public void setRefreshing() {
-        mSwipeRefreshLayout.setRefreshing(true);
-        doRefresh();
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+                doRefresh();
+            }
+        });
+
     }
 
     public void onRefreshCompleted() {
@@ -123,7 +129,7 @@ public class PullRecyclerView extends LinearLayout  {
             adapter.notifyLoadMoreStateChanged(IFooterView.State.done);
             mSwipeRefreshLayout.setRefreshing(false);
         }
-        mCurrentState=STATE_IDLE;
+        mCurrentState = STATE_IDLE;
     }
 
     public void setPullToRefreshEnabled(boolean isPullToRefreshEnabled) {
