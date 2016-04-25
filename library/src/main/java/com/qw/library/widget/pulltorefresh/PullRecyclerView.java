@@ -20,7 +20,7 @@ public class PullRecyclerView extends LinearLayout {
     private boolean isLoadMoreEnabled = false;
     private BaseListAdapter adapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
+    public RecyclerView mRecyclerView;
     private ILayoutManager layoutManager;
     public static final int STATE_IDLE = 0;
     public static final int STATE_LOAD_MORE = 1;
