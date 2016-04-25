@@ -39,6 +39,9 @@
         <activity
             android:name=".activity.LoopViewPagerActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.StickHeaderListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

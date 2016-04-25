@@ -8,17 +8,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.qw.frame.R;
 import com.qw.frame.core.BaseListActivity;
 import com.qw.frame.entity.Meizhi;
+import com.qw.frame.holder.PullRecyclerViewHolder;
 import com.qw.frame.utils.GankIoCallback;
 import com.qw.library.net.AppException;
 import com.qw.library.net.Request;
 import com.qw.library.net.RequestManager;
-import com.qw.library.utils.ImageDisplay;
 import com.qw.library.utils.Trace;
 import com.qw.library.widget.IFooterView;
 import com.qw.library.widget.pulltorefresh.PullRecyclerView;
@@ -34,7 +32,7 @@ import java.util.ArrayList;
  * Created by qinwei on 2015/10/26 14:57
  * email:qinwei_it@163.com
  */
-public class PullRecyclerActivity extends BaseListActivity {
+public class PullRecyclerActivity extends BaseListActivity<Meizhi> {
     int pageNum = 1;
 
     @Override
@@ -76,9 +74,8 @@ public class PullRecyclerActivity extends BaseListActivity {
 
             @Override
             public void onFailure(AppException e) {
-                if (!loadMore) {
-                    mPullRecycler.onRefreshCompleted();
-                } else {
+                mPullRecycler.onRefreshCompleted();
+                if (loadMore) {
                     adapter.notifyLoadMoreStateChanged(IFooterView.State.error);
                 }
             }
@@ -97,32 +94,11 @@ public class PullRecyclerActivity extends BaseListActivity {
     }
 
     @Override
-    protected QBaseViewHolder onCreateAdapterView(ViewGroup parent, int viewType) {
-        QBaseViewHolder holder = new ViewHolder(LayoutInflater.from(this).inflate(R.layout.activity_pullrecyclerview_item, null));
+    protected QBaseViewHolder onCreateAdapterView(LayoutInflater from, ViewGroup parent, int viewType) {
+        QBaseViewHolder holder = new PullRecyclerViewHolder(LayoutInflater.from(this).inflate(R.layout.activity_pullrecyclerview_item, null));
         return holder;
     }
 
-    class ViewHolder extends QBaseViewHolder {
-        private ImageView mHomeItemIconImg;
-        private TextView mHomeItemTitleLabel;
-
-        public ViewHolder(View view) {
-            super(view);
-        }
-
-        @Override
-        public void initializeView(View v) {
-            mHomeItemIconImg = (ImageView) v.findViewById(R.id.mHomeItemIconImg);
-            mHomeItemTitleLabel = (TextView) v.findViewById(R.id.mHomeItemTitleLabel);
-        }
-
-        @Override
-        public void initializeData(int position) {
-            Meizhi icon = (Meizhi) modules.get(position);
-            ImageDisplay.getInstance().displayImage(icon.getUrl(), mHomeItemIconImg);
-            mHomeItemTitleLabel.setText(icon.getPublishedAt());
-        }
-    }
 
     @Override
     public int getHeaderLayoutId() {
@@ -131,7 +107,6 @@ public class PullRecyclerActivity extends BaseListActivity {
 
     @Override
     protected void initializeHeaderView(View v) {
-
     }
 
     @Override
@@ -147,10 +122,10 @@ public class PullRecyclerActivity extends BaseListActivity {
                 setLayoutManager(new MLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                 break;
             case R.id.action_gridview:
-                setGridLayoutManager();
+                setLayoutManager(new MGridLayoutManager(this, 2));
                 break;
             case R.id.action_staggered:
-                setStaggeredGridLayoutManager();
+                setLayoutManager(new MStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                 break;
             case R.id.action_add:
                 break;
@@ -161,18 +136,6 @@ public class PullRecyclerActivity extends BaseListActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-    private void setStaggeredGridLayoutManager() {
-        MStaggeredGridLayoutManager lm = new MStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        setLayoutManager(lm);
-    }
-
-    private void setGridLayoutManager() {
-        MGridLayoutManager lm = new MGridLayoutManager(this, 2);
-        setLayoutManager(lm);
-    }
-
 
     @Override
     protected boolean isLoadMoreEnabled() {

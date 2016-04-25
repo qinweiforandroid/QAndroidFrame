@@ -19,8 +19,8 @@ import java.util.ArrayList;
  * Created by qinwei on 2015/10/26 13:51
  * email:qinwei_it@163.com
  */
-public abstract class BaseListActivity extends BaseActivity implements PullRecyclerView.OnPullRecyclerListener {
-    protected ArrayList<Object> modules = new ArrayList<>();
+public abstract class BaseListActivity<T> extends BaseActivity implements PullRecyclerView.OnPullRecyclerListener {
+    protected ArrayList<T> modules = new ArrayList<>();
     protected PullRecyclerView mPullRecycler;
     protected BaseListAdapter adapter;
 
@@ -33,11 +33,12 @@ public abstract class BaseListActivity extends BaseActivity implements PullRecyc
         mPullRecycler.setLoadMoreEnabled(isLoadMoreEnabled());
         mPullRecycler.setLayoutManager(getLayoutManager());
         mPullRecycler.setOnPullRecyclerListener(this);
-        adapter = new ListAdapter();
-        adapter.isHeaderViewShow=getHeaderLayoutId()!=-1;
+        adapter = new ListAdapter(modules);
+        adapter.isHeaderViewShow = getHeaderLayoutId() != -1;
         mPullRecycler.setAdapter(adapter);
     }
-    public void setLayoutManager(ILayoutManager manager){
+
+    public void setLayoutManager(ILayoutManager manager) {
         mPullRecycler.setLayoutManager(manager);
     }
 
@@ -50,17 +51,22 @@ public abstract class BaseListActivity extends BaseActivity implements PullRecyc
         return false;
     }
 
-    public int getHeaderLayoutId(){
+    public int getHeaderLayoutId() {
         return -1;
     }
-    protected void initializeHeaderView(View v){
+
+    protected void initializeHeaderView(View v) {
 
     }
 
-    class ListAdapter extends BaseListAdapter {
+    class ListAdapter extends BaseListAdapter<T> {
+        public ListAdapter(ArrayList<T> modules) {
+            super(modules);
+        }
+
         @Override
         protected QBaseViewHolder onCreateHeaderView(LayoutInflater from, ViewGroup parent) {
-            QBaseViewHolder holder=new HeaderHolder(from.inflate(getHeaderLayoutId(),parent,false));
+            QBaseViewHolder holder = new HeaderHolder(from.inflate(getHeaderLayoutId(), parent, false));
             return holder;
         }
 
@@ -71,7 +77,7 @@ public abstract class BaseListActivity extends BaseActivity implements PullRecyc
 
         @Override
         public QBaseViewHolder onCreateAdapterView(ViewGroup parent, int viewType) {
-            return BaseListActivity.this.onCreateAdapterView(parent, viewType);
+            return BaseListActivity.this.onCreateAdapterView(LayoutInflater.from(BaseListActivity.this), parent, viewType);
         }
 
         @Override
@@ -85,25 +91,29 @@ public abstract class BaseListActivity extends BaseActivity implements PullRecyc
         }
     }
 
-    private class HeaderHolder extends QBaseViewHolder{
+    private class HeaderHolder extends QBaseViewHolder {
 
         public HeaderHolder(View itemView) {
             super(itemView);
         }
+
         @Override
         public void initializeView(View v) {
             setIsRecyclable(false);
             initializeHeaderView(v);
         }
     }
-    protected abstract QBaseViewHolder onCreateAdapterView(ViewGroup parent, int viewType);
+
+    protected abstract QBaseViewHolder onCreateAdapterView(LayoutInflater from, ViewGroup parent, int viewType);
 
     protected int getAdapterItemViewType(int position) {
         return 0;
     }
+
     protected boolean isLoadMoreEnabled() {
         return false;
     }
+
     public ILayoutManager getLayoutManager() {
         return new MLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
     }
