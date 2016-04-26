@@ -66,7 +66,7 @@ public abstract class BaseViewPagerActivity<T> extends BaseActivity implements V
     /**
      * 获取所有底部tab图片资源
      *
-     * @param data
+     * @param position
      * @return
      */
     public abstract Fragment getFragmentAtPosition(int position);

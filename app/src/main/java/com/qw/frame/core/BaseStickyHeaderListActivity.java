@@ -5,10 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.qw.frame.R;
-import com.qw.library.widget.pulltorefresh.sticky.RecyclerItemClickListener;
 import com.qw.library.widget.pulltorefresh.BaseListAdapter;
 import com.qw.library.widget.pulltorefresh.PullRecyclerView;
 import com.qw.library.widget.pulltorefresh.QBaseViewHolder;
@@ -25,7 +23,7 @@ import java.util.ArrayList;
  * Created by qinwei on 2015/10/26 13:51
  * email:qinwei_it@163.com
  */
-public abstract class BaseStickyHeaderListActivity<T> extends BaseActivity implements PullRecyclerView.OnPullRecyclerListener {
+public abstract class BaseStickyHeaderListActivity<T> extends BaseActivity implements PullRecyclerView.OnPullRecyclerListener, StickyRecyclerHeadersTouchListener.OnHeaderClickListener {
     protected ArrayList<T> modules = new ArrayList<>();
     protected PullRecyclerView mPullRecycler;
     protected ListAdapter adapter;
@@ -49,25 +47,10 @@ public abstract class BaseStickyHeaderListActivity<T> extends BaseActivity imple
 
         // Add decoration for dividers between list items
 //        mPullRecycler.addItemDecoration(new DividerDecoration(this));
-
         // Add touch listeners
-        StickyRecyclerHeadersTouchListener touchListener =
-                new StickyRecyclerHeadersTouchListener(mPullRecycler.mRecyclerView, headersDecor);
-        touchListener.setOnHeaderClickListener(
-                new StickyRecyclerHeadersTouchListener.OnHeaderClickListener() {
-                    @Override
-                    public void onHeaderClick(View header, int position, long headerId) {
-                        Toast.makeText(BaseStickyHeaderListActivity.this, "Header position: " + position + ", id: " + headerId,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
+        StickyRecyclerHeadersTouchListener touchListener = new StickyRecyclerHeadersTouchListener(mPullRecycler.mRecyclerView, headersDecor);
+        touchListener.setOnHeaderClickListener(this);
         mPullRecycler.mRecyclerView.addOnItemTouchListener(touchListener);
-        mPullRecycler.mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                BaseStickyHeaderListActivity.this.onItemClick(view,position);
-            }
-        }));
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
@@ -98,10 +81,12 @@ public abstract class BaseStickyHeaderListActivity<T> extends BaseActivity imple
 
     }
 
+
     public class ListAdapter extends BaseListAdapter<T> implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
         public ListAdapter(ArrayList<T> modules) {
             super(modules);
         }
+
         @Override
         protected QBaseViewHolder onCreateHeaderView(LayoutInflater from, ViewGroup parent) {
             QBaseViewHolder holder = new HeaderHolder(from.inflate(getHeaderLayoutId(), parent, false));
@@ -125,6 +110,9 @@ public abstract class BaseStickyHeaderListActivity<T> extends BaseActivity imple
 
         @Override
         public long getHeaderId(int position) {
+            if (position == modules.size()) {
+                return -1;
+            }
             return BaseStickyHeaderListActivity.this.getHeaderId(position);
         }
 
@@ -151,7 +139,6 @@ public abstract class BaseStickyHeaderListActivity<T> extends BaseActivity imple
     protected abstract long getHeaderId(int position);
 
     private class HeaderHolder extends QBaseViewHolder {
-
         public HeaderHolder(View itemView) {
             super(itemView);
         }
@@ -176,5 +163,4 @@ public abstract class BaseStickyHeaderListActivity<T> extends BaseActivity imple
     public ILayoutManager getLayoutManager() {
         return new MLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
     }
-    protected abstract void onItemClick(View view, int position);
 }

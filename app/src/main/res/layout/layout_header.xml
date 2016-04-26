@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     android:padding="16dp">
     <TextView
+        android:id="@+id/mRecyclerViewHeaderLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="28sp"
         android:gravity="center_horizontal"
         android:text="header"/>
-
 </LinearLayout>

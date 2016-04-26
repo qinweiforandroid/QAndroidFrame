@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.qw.frame.R;
 import com.qw.frame.core.BaseStickyHeaderListActivity;
+import com.qw.library.widget.IFooterView;
+import com.qw.library.widget.pulltorefresh.PullRecyclerView;
 import com.qw.library.widget.pulltorefresh.QBaseViewHolder;
 
 import java.util.Arrays;
@@ -36,15 +38,37 @@ public class StickHeaderListActivity extends BaseStickyHeaderListActivity<String
     }
 
     @Override
-    protected void onItemClick(View view, int position) {
-        Toast.makeText(StickHeaderListActivity.this, modules.get(position), Toast.LENGTH_SHORT).show();
+    protected void initializeData(Bundle saveInstance) {
+        mPullRecycler.setPullToRefreshEnabled(true);
+        mPullRecycler.setLoadMoreEnabled(true);
+        modules.addAll(Arrays.asList(getDummyDataSet()));
+        adapter.notifyDataSetChanged();
     }
 
     @Override
-    protected void initializeData(Bundle saveInstance) {
-        mPullRecycler.setPullToRefreshEnabled(false);
-        modules.addAll(Arrays.asList(getDummyDataSet()));
-        adapter.notifyDataSetChanged();
+    public void onRefresh(PullRecyclerView.State state) {
+        if (state == PullRecyclerView.State.PULL_TO_START) {
+            mPullRecycler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    modules.clear();
+                    modules.addAll(Arrays.asList(getDummyDataSet()));
+                    adapter.notifyDataSetChanged();
+                    adapter.notifyLoadMoreStateChanged(IFooterView.State.done);
+                    mPullRecycler.onRefreshCompleted();
+                }
+            }, 1000);
+        } else {
+            mPullRecycler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    modules.addAll(Arrays.asList(getDummyDataSet()));
+                    adapter.notifyDataSetChanged();
+                    adapter.notifyLoadMoreStateChanged(IFooterView.State.no_data);
+                    mPullRecycler.onRefreshCompleted();
+                }
+            }, 1000);
+        }
     }
 
     @Override
@@ -57,6 +81,12 @@ public class StickHeaderListActivity extends BaseStickyHeaderListActivity<String
     protected RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_header, parent, false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(StickHeaderListActivity.this, "onCreateHeaderViewHolder", Toast.LENGTH_SHORT).show();
+            }
+        });
         return new RecyclerView.ViewHolder(view) {
         };
     }
@@ -68,7 +98,7 @@ public class StickHeaderListActivity extends BaseStickyHeaderListActivity<String
 //        if (position == 0) {
 //            return -1;
 //        } else {
-            return modules.get(position).charAt(0);
+        return modules.get(position).charAt(0);
 //        }
     }
 
@@ -76,6 +106,11 @@ public class StickHeaderListActivity extends BaseStickyHeaderListActivity<String
     protected QBaseViewHolder onCreateAdapterView(LayoutInflater from, ViewGroup parent, int viewType) {
         QBaseViewHolder holder = new PullRecyclerViewHolder(from.inflate(R.layout.activity_pullrecyclerview_sticky_header_item, parent, false), this);
         return holder;
+    }
+
+    @Override
+    public void onHeaderClick(View header, int position, long headerId) {
+        Toast.makeText(StickHeaderListActivity.this, modules.get(position), Toast.LENGTH_SHORT).show();
     }
 
     public class PullRecyclerViewHolder extends QBaseViewHolder<String> {
@@ -88,12 +123,19 @@ public class StickHeaderListActivity extends BaseStickyHeaderListActivity<String
         @Override
         public void initializeView(View v) {
             mStickyItemLabel = (TextView) v.findViewById(R.id.mStickyItemLabel);
-        }
-        @Override
-        public void initializeData(String s, int position) {
-            mStickyItemLabel.setText(s);
+
         }
 
+        @Override
+        public void initializeData(final String s, int position) {
+            mStickyItemLabel.setText(s);
+            mStickyItemLabel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(StickHeaderListActivity.this, s, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
 }
