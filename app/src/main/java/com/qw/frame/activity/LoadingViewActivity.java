@@ -32,7 +32,7 @@ public class LoadingViewActivity extends BaseActivity implements LoadingView.OnR
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_emtyp_view, menu);
+        getMenuInflater().inflate(R.menu.menu_loading_view, menu);
         return true;
     }
 

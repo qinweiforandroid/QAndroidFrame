@@ -36,7 +36,7 @@ public class HomeActivity extends BaseListActivity<ClassEntity> {
 
     @Override
     protected QBaseViewHolder onCreateAdapterView(LayoutInflater from, ViewGroup parent, int viewType) {
-        return new ClassEntityViewHolder(from.inflate(R.layout.activity_home_item, null), this);
+        return new ClassEntityViewHolder(from.inflate(R.layout.activity_home_item, parent,false), this);
     }
 
     @Override

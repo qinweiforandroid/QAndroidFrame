@@ -61,7 +61,13 @@ public abstract class BaseViewPagerActivity<T> extends BaseActivity implements V
         public int getCount() {
             return modules.size();
         }
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return getPageTitleAtPosition(position);
+        }
     }
+
+    protected abstract CharSequence getPageTitleAtPosition(int position);
 
     /**
      * 获取所有底部tab图片资源

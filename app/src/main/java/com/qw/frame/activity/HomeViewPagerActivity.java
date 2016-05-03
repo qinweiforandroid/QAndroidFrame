@@ -1,6 +1,7 @@
 package com.qw.frame.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
 import com.qw.frame.R;
@@ -17,6 +18,7 @@ import com.qw.library.widget.tab.TabIndicator;
  */
 public class HomeViewPagerActivity extends BaseViewPagerActivity<Tab> implements TabIndicator.OnTabClickListener {
     private TabIndicator generalTabIndicator;
+    private TabLayout mTabLayout;
 
     @Override
     protected void setContentView() {
@@ -26,6 +28,7 @@ public class HomeViewPagerActivity extends BaseViewPagerActivity<Tab> implements
     @Override
     protected void initializeView() {
         super.initializeView();
+        mTabLayout = (TabLayout) findViewById(R.id.mTabLayout);
         generalTabIndicator = (TabIndicator) findViewById(R.id.generalTabIndicator);
         generalTabIndicator.setOnTabClickListener(this);
     }
@@ -39,12 +42,18 @@ public class HomeViewPagerActivity extends BaseViewPagerActivity<Tab> implements
         notifyDataSetChanged();
         generalTabIndicator.initializeData(modules);
         generalTabIndicator.setCurrentTab(0);
+        mTabLayout.setupWithViewPager(generalViewPager);
     }
 
     @Override
     public void onPageSelected(int position) {
         Trace.e("onPageSelected " + position);
         generalTabIndicator.setCurrentTab(position);
+    }
+
+    @Override
+    protected CharSequence getPageTitleAtPosition(int position) {
+        return modules.get(position).getLabel();
     }
 
 

@@ -1,6 +1,9 @@
 package com.qw.frame.fragment;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -39,6 +42,17 @@ public class PageFragment extends BaseFragment {
     protected void initializeView(View v) {
         mContentLabel = (TextView) v.findViewById(R.id.mContentLabel);
         mContentLabel.setText("" + System.currentTimeMillis());
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_loading_view, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

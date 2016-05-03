@@ -60,7 +60,6 @@ public class AppConfig {
         } else {
             return code < getPackageInfo().versionCode;
         }
-
     }
 
     public void put(String key, boolean value) {
