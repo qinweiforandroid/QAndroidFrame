@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.qw.library.AppStatusTracker;
 import com.qw.frame.MyApplication;
 import com.qw.frame.R;
 import com.qw.library.config.AppConfig;
@@ -30,7 +31,7 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        MyApplication.getInstance().setAppState(MyApplication.APP_STATE_STARTED);
+        AppStatusTracker.getInstance().setAppState(AppStatusTracker.APP_STATE_STARTED);
         if (AppConfig.getInstance().isFirstOpen()) {
             Log.e("wei", "app is first start");
             AppConfig.getInstance().saveCurrentVersionCode();

@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.qw.frame.MyApplication;
+import com.qw.library.AppStatusTracker;
 import com.qw.frame.R;
 import com.qw.frame.activity.HomeActivity;
 import com.qw.frame.utils.Constants;
@@ -31,12 +31,12 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
     @Override
     protected void onCreate(Bundle saveInstance) {
         super.onCreate(saveInstance);
-        if (!MyApplication.getInstance().isAppKilled()) {
+        if (AppStatusTracker.getInstance().isAppKilled()) {
+            protectApp();
+        } else {
             setContentView();
             initializeView();
             initializeData(saveInstance);
-        } else {
-            protectApp();
         }
     }
 
@@ -142,7 +142,9 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
     }
 
     @Override
-    protected void onRestart() { super.onRestart(); }
+    protected void onRestart() {
+        super.onRestart();
+    }
 
     @Override
     protected void onResume() {
