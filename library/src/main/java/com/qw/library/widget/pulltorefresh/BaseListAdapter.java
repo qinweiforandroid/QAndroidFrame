@@ -68,9 +68,9 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter {
         }
         QBaseViewHolder h = (QBaseViewHolder) holder;
         if (position < 0 || position == modules.size()) {
-            h.initializeData(null, position);
+            h.initializeData(null);
         } else {
-            h.initializeData(modules.get(position), position);
+            h.initializeData(modules.get(position));
         }
         if (position + 1 > mLastPosition) {
             Animator animator = getDisplayAnimator(holder.itemView);
@@ -125,7 +125,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter {
         }
 
         @Override
-        public void initializeData(Object o, int position) {
+        public void initializeData(Object o) {
             footerView.notifyDataChanged(state);
         }
 

@@ -127,7 +127,7 @@ public class StickHeaderListActivity extends BaseStickyHeaderListActivity<String
         }
 
         @Override
-        public void initializeData(final String s, int position) {
+        public void initializeData(final String s) {
             mStickyItemLabel.setText(s);
             mStickyItemLabel.setOnClickListener(new View.OnClickListener() {
                 @Override

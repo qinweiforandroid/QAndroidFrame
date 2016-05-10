@@ -35,7 +35,7 @@ public class ClassEntityViewHolder extends QBaseViewHolder<ClassEntity> implemen
     }
 
     @Override
-    public void initializeData(ClassEntity classEntity, int position) {
+    public void initializeData(ClassEntity classEntity) {
         this.clazz = classEntity;
         ImageDisplay.getInstance().displayImage(clazz.getIcon(), mHomeItemIconImg);
         mHomeItemTitleLabel.setText(clazz.getTitle());

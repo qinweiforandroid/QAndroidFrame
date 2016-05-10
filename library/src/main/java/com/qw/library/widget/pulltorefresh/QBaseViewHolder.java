@@ -24,6 +24,6 @@ public abstract class QBaseViewHolder<T> extends RecyclerView.ViewHolder {
 
     public abstract void initializeView(View v);
 
-    public void initializeData(T t, int position) {
+    public void initializeData(T module) {
     }
 }
