@@ -126,16 +126,17 @@ public class StickyRecyclerHeadersDecoration extends RecyclerView.ItemDecoration
    * @return position of header, or -1 if not found
    */
   public int findHeaderPositionUnder(int x, int y) {
+    int tempPosition = -1; // Added
     for (int i = 0; i < mHeaderRects.size(); i++) {
       Rect rect = mHeaderRects.get(mHeaderRects.keyAt(i));
       if (rect.contains(x, y)) {
         int position = mHeaderRects.keyAt(i);
         if (mVisibilityAdapter == null || mVisibilityAdapter.isPositionVisible(position)) {
-          return position;
+          tempPosition = position; // Added
         }
       }
     }
-    return -1;
+    return tempPosition; // Added
   }
 
   /**
