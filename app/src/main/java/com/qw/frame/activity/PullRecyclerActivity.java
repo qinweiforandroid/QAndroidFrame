@@ -13,6 +13,8 @@ import com.qw.frame.R;
 import com.qw.frame.core.BaseListActivity;
 import com.qw.frame.entity.Meizhi;
 import com.qw.frame.holder.PullRecyclerViewHolder;
+import com.qw.frame.model.Controller;
+import com.qw.frame.model.impl.GankModel;
 import com.qw.frame.utils.GankIoCallback;
 import com.qw.library.net.AppException;
 import com.qw.library.net.Request;
@@ -32,7 +34,8 @@ import java.util.ArrayList;
  * Created by qinwei on 2015/10/26 14:57
  * email:qinwei_it@163.com
  */
-public class PullRecyclerActivity extends BaseListActivity<Meizhi> {
+public class PullRecyclerActivity extends BaseListActivity<Meizhi> implements Controller {
+    private GankModel model;
     int pageNum = 1;
 
     @Override
@@ -49,48 +52,16 @@ public class PullRecyclerActivity extends BaseListActivity<Meizhi> {
     protected void initializeData(Bundle saveInstance) {
         setTitle("RecyclerRefreshView");
         mPullRecycler.setRefreshing();
-    }
-
-    public void loadDataFromServer(final boolean loadMore) {
-        Request request = new Request("http://gank.io/api/data/福利/20/" + pageNum);
-        request.setCallback(new GankIoCallback<ArrayList<Meizhi>>() {
-            @Override
-            public void onSuccess(ArrayList<Meizhi> result) {
-                Trace.e("onSuccess:" + result.size());
-                if (loadMore) {
-                    if (result.size() < 20) {
-                        adapter.notifyLoadMoreStateChanged(IFooterView.State.no_data);
-                    } else {
-                        adapter.notifyLoadMoreStateChanged(IFooterView.State.done);
-                    }
-                } else {
-                    modules.clear();
-                }
-                pageNum++;
-                modules.addAll(result);
-                mPullRecycler.onRefreshCompleted();
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(AppException e) {
-                mPullRecycler.onRefreshCompleted();
-                if (loadMore) {
-                    adapter.notifyLoadMoreStateChanged(IFooterView.State.error);
-                }
-            }
-        });
-        RequestManager.getInstance().execute(this.toString(), request);
+        model=new GankModel();
+        model.setController(this);
     }
 
     @Override
     public void onRefresh(PullRecyclerView.State state) {
         if (state == PullRecyclerView.State.PULL_TO_START) {
             pageNum = 1;
-            loadDataFromServer(false);
-        } else {
-            loadDataFromServer(true);
         }
+        model.loadGankByPage(pageNum);
     }
 
     @Override
@@ -151,5 +122,30 @@ public class PullRecyclerActivity extends BaseListActivity<Meizhi> {
     protected void onDestroy() {
         super.onDestroy();
         RequestManager.getInstance().cancelRequest(this.toString());
+    }
+
+    @Override
+    public void onSuccess(String action) {
+        if (pageNum!=1) {
+            if (model.meizhis.size() < 20) {
+                adapter.notifyLoadMoreStateChanged(IFooterView.State.no_data);
+            } else {
+                adapter.notifyLoadMoreStateChanged(IFooterView.State.done);
+            }
+        } else {
+            modules.clear();
+        }
+        pageNum++;
+        modules.addAll(model.meizhis);
+        mPullRecycler.onRefreshCompleted();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailure(String action, int errorCode, String errorMsg) {
+        mPullRecycler.onRefreshCompleted();
+        if (pageNum!=1) {
+            adapter.notifyLoadMoreStateChanged(IFooterView.State.error);
+        }
     }
 }

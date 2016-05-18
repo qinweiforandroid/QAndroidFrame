@@ -91,18 +91,6 @@ public abstract class BaseListActivity<T> extends BaseActivity implements PullRe
         }
     }
 
-    private class HeaderHolder extends QBaseViewHolder {
-
-        public HeaderHolder(View itemView) {
-            super(itemView);
-        }
-
-        @Override
-        public void initializeView(View v) {
-            setIsRecyclable(false);
-            initializeHeaderView(v);
-        }
-    }
 
     protected abstract QBaseViewHolder onCreateAdapterView(LayoutInflater from, ViewGroup parent, int viewType);
 
@@ -116,5 +104,18 @@ public abstract class BaseListActivity<T> extends BaseActivity implements PullRe
 
     public ILayoutManager getLayoutManager() {
         return new MLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+    }
+
+    class HeaderHolder extends QBaseViewHolder {
+
+        public HeaderHolder(View itemView) {
+            super(itemView);
+        }
+
+        @Override
+        public void initializeView(View v) {
+            setIsRecyclable(false);
+            initializeHeaderView(v);
+        }
     }
 }

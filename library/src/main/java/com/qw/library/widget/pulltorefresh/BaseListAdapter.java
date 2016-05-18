@@ -63,16 +63,17 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter {
             }
         }
 
+        //如果有header显示则向外提供的position 下标－1
         if (isHeaderViewShow) {
             position--;
         }
         QBaseViewHolder h = (QBaseViewHolder) holder;
-        if (position < 0 || position == modules.size()) {
+        if (position < 0 || position == modules.size()) {//header and footer  not should init data
             h.initializeData(null);
         } else {
             h.initializeData(modules.get(position));
         }
-        if (position + 1 > mLastPosition) {
+        if (position + 1 > mLastPosition) {//动画播放
             Animator animator = getDisplayAnimator(holder.itemView);
             if (animator != null) animator.start();
             mLastPosition = position + 1;
