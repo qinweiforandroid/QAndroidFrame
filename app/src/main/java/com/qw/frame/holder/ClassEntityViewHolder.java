@@ -45,6 +45,9 @@ public class ClassEntityViewHolder extends QBaseViewHolder<ClassEntity> implemen
     public void onClick(View v) {
         if (clazz.getClazz() != null) {
             Intent intent = new Intent(context, clazz.getClazz());
+            if(clazz.args!=null){
+                intent.putExtras(clazz.args);
+            }
             intent.putExtra(Constants.KEY_TITLE, clazz.getTitle());
             context.startActivity(intent);
         }

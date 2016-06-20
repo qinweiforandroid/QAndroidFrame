@@ -12,4 +12,5 @@ public class Constants {
     public static final int LOAD_DATA_STATE_LOAD_FIRST=1;
     public static final int LOAD_DATA_STATE_LOAD_REFRESH=2;
     public static final int LOAD_DATA_STATE_LOAD_MORE=3;
+    public static final String KEY_FRAGMENT_CLASS = "key_fragment_class";
 }

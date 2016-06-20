@@ -147,6 +147,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter {
             case no_data:
                 isLoadMoreShown = true;
                 notifyItemInserted(getItemCount());
+                notifyDataSetChanged();
 //                notifyItemChanged(getItemCount() - 1);
                 break;
             case done:

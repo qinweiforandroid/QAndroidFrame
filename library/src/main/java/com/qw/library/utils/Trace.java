@@ -3,7 +3,7 @@ package com.qw.library.utils;
 import android.util.Log;
 
 public class Trace {
-    private static final String TAG = "log";
+    public static final String TAG = "log";
 
     public static boolean model = true;
 
