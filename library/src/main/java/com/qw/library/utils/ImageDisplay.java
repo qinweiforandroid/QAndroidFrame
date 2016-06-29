@@ -55,8 +55,8 @@ public class ImageDisplay {
 
     public DisplayOptions getDefaultOptions() {
         DisplayOptions options = new DisplayOptions();
-        options.ingId = R.drawable.ic_launcher;
-        options.errorId = R.drawable.ic_load_err;
+        options.ingId = R.drawable.nim_image_default;
+        options.errorId = R.drawable.nim_image_default;
         return options;
     }
 

@@ -58,9 +58,10 @@ public class RequestTask extends AsyncTask<Void, Long, Object> {
         } catch (AppException e) {
             if (e.type == AppException.ErrorType.TIMEOUT) {
                 retry++;
-                if (retry < request.maxRetryCount){
-                    doRequest(retry);
+                if (retry < request.maxRetryCount) {
+                    return doRequest(retry);
                 }
+
             }
             return e;
         }

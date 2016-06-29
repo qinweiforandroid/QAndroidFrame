@@ -54,6 +54,7 @@ public class PullRecyclerActivity extends BaseListActivity<Meizhi> implements Co
         mPullRecycler.setRefreshing();
         model=new GankModel();
         model.setController(this);
+        setLayoutManager(new MStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
     }
 
     @Override

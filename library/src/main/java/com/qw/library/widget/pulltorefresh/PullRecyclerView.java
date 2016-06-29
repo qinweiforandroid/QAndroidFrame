@@ -76,6 +76,7 @@ public class PullRecyclerView extends LinearLayout {
                     if (listener != null) {
                         mCurrentState = STATE_LOAD_MORE;
                         adapter.notifyLoadMoreStateChanged(IFooterView.State.ing);
+                        setPullToRefreshEnabled(false);
                         listener.onRefresh(State.PULL_TO_END);
                     }
                 }
@@ -128,6 +129,8 @@ public class PullRecyclerView extends LinearLayout {
         if (mCurrentState == STATE_PULL_TO_REFRESH) {
             adapter.notifyLoadMoreStateChanged(IFooterView.State.done);
             mSwipeRefreshLayout.setRefreshing(false);
+        }else{
+            setPullToRefreshEnabled(true);
         }
         mCurrentState = STATE_IDLE;
     }

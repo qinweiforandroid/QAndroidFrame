@@ -30,6 +30,6 @@ public class PullRecyclerViewHolder extends QBaseViewHolder<Meizhi> {
     @Override
     public void initializeData(Meizhi meizhi) {
         ImageDisplay.getInstance().displayImage(meizhi.getUrl(), mHomeItemIconImg);
-        mHomeItemTitleLabel.setText(meizhi.getPublishedAt());
+        mHomeItemTitleLabel.setText(meizhi.getDesc());
     }
 }

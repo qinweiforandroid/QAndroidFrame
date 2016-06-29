@@ -18,8 +18,8 @@ import java.util.Map;
  * email:qinwei_it@163.com
  */
 public class HttpURLConnectionUtil {
-    private static final int CONNECT_TIME_OUT = 15 * 1000;
-    private static final int READ_TIME_OUT = 15 * 1000;
+    private static final int CONNECT_TIME_OUT = 8 * 1000;
+    private static final int READ_TIME_OUT = 8 * 1000;
 
     public static HttpURLConnection execute(Request request, OnProgressUpdatedListener listener) throws AppException {
         if (!URLUtil.isNetworkUrl(request.url)) {
