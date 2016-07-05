@@ -26,5 +26,6 @@
         android:background="@color/tab_indicator_gray"
         android:clickable="true"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:paddingRight="10dp"
+        app:label_color="@color/selector_tab" />
 </LinearLayout>

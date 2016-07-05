@@ -15,19 +15,13 @@ import com.qw.frame.entity.Meizhi;
 import com.qw.frame.holder.PullRecyclerViewHolder;
 import com.qw.frame.model.Controller;
 import com.qw.frame.model.impl.GankModel;
-import com.qw.frame.utils.GankIoCallback;
-import com.qw.library.net.AppException;
-import com.qw.library.net.Request;
 import com.qw.library.net.RequestManager;
-import com.qw.library.utils.Trace;
 import com.qw.library.widget.IFooterView;
 import com.qw.library.widget.pulltorefresh.PullRecyclerView;
 import com.qw.library.widget.pulltorefresh.QBaseViewHolder;
 import com.qw.library.widget.pulltorefresh.layout.MGridLayoutManager;
 import com.qw.library.widget.pulltorefresh.layout.MLinearLayoutManager;
 import com.qw.library.widget.pulltorefresh.layout.MStaggeredGridLayoutManager;
-
-import java.util.ArrayList;
 
 
 /**
@@ -54,7 +48,7 @@ public class PullRecyclerActivity extends BaseListActivity<Meizhi> implements Co
         mPullRecycler.setRefreshing();
         model=new GankModel();
         model.setController(this);
-        setLayoutManager(new MStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+//        setLayoutManager(new MStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
     }
 
     @Override

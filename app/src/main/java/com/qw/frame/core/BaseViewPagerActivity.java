@@ -16,16 +16,16 @@ import java.util.ArrayList;
 public abstract class BaseViewPagerActivity<T> extends BaseActivity implements ViewPager.OnPageChangeListener {
     protected DataPageAdapter adapter;
     protected ArrayList<T> modules = new ArrayList<>();
-    protected ViewPager generalViewPager;
+    protected ViewPager mViewPager;
 
     @Override
     protected void initializeView() {
         super.initializeView();
-        generalViewPager = (ViewPager) findViewById(R.id.generalViewPager);
-        generalViewPager.addOnPageChangeListener(this);
-        generalViewPager.setOffscreenPageLimit(4);
+        mViewPager = (ViewPager) findViewById(R.id.generalViewPager);
+        mViewPager.addOnPageChangeListener(this);
+        mViewPager.setOffscreenPageLimit(4);
         adapter = new DataPageAdapter(getSupportFragmentManager());
-        generalViewPager.setAdapter(adapter);
+        mViewPager.setAdapter(adapter);
     }
 
     public void notifyDataSetChanged() {

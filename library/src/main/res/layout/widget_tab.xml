@@ -11,16 +11,13 @@
         android:id="@+id/mTabIconImg"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:duplicateParentState="true"
-        android:src="@drawable/selector_education_tab" />
+        android:duplicateParentState="true" />
 
     <TextView
         android:id="@+id/mTabLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:duplicateParentState="true"
-        android:text="教育"
-        android:textColor="@color/selector_tab"
         android:textSize="12sp" />
 
 </LinearLayout>

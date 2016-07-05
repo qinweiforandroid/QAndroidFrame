@@ -139,7 +139,7 @@ public abstract class BaseFragment extends Fragment implements LoadingView.OnRet
     }
 
     private void trace(String msg){
-        Trace.d(TAG+":"+msg);
+//        Trace.d(TAG+":"+msg);
     }
     @Override
     public void onRetry() {

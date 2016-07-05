@@ -1,6 +1,7 @@
 package com.qw.library.widget.tab;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -14,6 +15,8 @@ public class TabView extends LinearLayout {
 
     private ImageView mTabIconImg;
     private TextView mTabLabel;
+    private ColorStateList labelColorStateList;
+    private Tab mTab;
 
     public TabView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -37,8 +40,8 @@ public class TabView extends LinearLayout {
     }
 
     public void initializeData(Tab tab) {
-        mTabIconImg.setImageResource(tab.getIconRes());
-        mTabLabel.setText(tab.getLabel());
+        this.mTab = tab;
+
     }
 
     public void notifyDataChanged(int number) {
@@ -49,5 +52,19 @@ public class TabView extends LinearLayout {
         BadgeView badgeView = new BadgeView(getContext());
         badgeView.setTargetView(mTabIconImg);
         badgeView.setBadgeCount(number);
+    }
+
+    public void notifyDataChanged() {
+        mTabIconImg.setImageResource(mTab.getIconRes());
+        mTabLabel.setText(mTab.getLabel());
+        mTabLabel.setTextColor(labelColorStateList);
+    }
+
+    public void setLabelColorStateList(ColorStateList labelColorStateList) {
+        this.labelColorStateList = labelColorStateList;
+    }
+
+    public ColorStateList getLabelColorStateList() {
+        return labelColorStateList;
     }
 }

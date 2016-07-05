@@ -42,7 +42,7 @@ public class HomeViewPagerActivity extends BaseViewPagerActivity<Tab> implements
         notifyDataSetChanged();
         generalTabIndicator.initializeData(modules);
         generalTabIndicator.setCurrentTab(0);
-        mTabLayout.setupWithViewPager(generalViewPager);
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class HomeViewPagerActivity extends BaseViewPagerActivity<Tab> implements
     @Override
     public boolean onTabClick(int index) {
         Trace.e("onTabClick " + index);
-        generalViewPager.setCurrentItem(index);
+        mViewPager.setCurrentItem(index);
         return true;
     }
 

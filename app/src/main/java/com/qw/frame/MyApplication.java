@@ -3,6 +3,7 @@ package com.qw.frame;
 import android.app.Application;
 
 import com.qw.frame.utils.GlideDisplay;
+import com.qw.frame.utils.UniversalImageloaderDisplay;
 import com.qw.library.AppStatusTracker;
 import com.qw.library.config.AppConfig;
 import com.qw.library.utils.ImageDisplay;

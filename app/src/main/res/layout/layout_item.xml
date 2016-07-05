@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/mRecyclerViewHeaderLabel"
+        android:id="@+id/mItemLabel"
+        style="@style/ContentText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="header"
-        android:textSize="28sp" />
+        android:padding="@dimen/spacing_large"
+        android:text="hello" />
+
 </LinearLayout>

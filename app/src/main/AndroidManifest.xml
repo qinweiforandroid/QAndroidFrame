@@ -40,8 +40,9 @@
             android:name=".activity.LoopViewPagerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.FragmentContentActivity"
-             />
+            android:name=".activity.CollapsingToolbarLayoutActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.FragmentContentActivity" />
     </application>
 
 </manifest>

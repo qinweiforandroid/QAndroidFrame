@@ -33,7 +33,7 @@ public class Request {
     public OnGlobalExceptionListener onGlobalExceptionListener;//全局异常处理
     public OnCompletedListener completedListener;//请求结束时回掉
     public volatile boolean isCancelled;
-    public int maxRetryCount = 3;
+    public int maxRetryCount = 1;
     public String tag;
 
     public Request(String url, RequestMethod method) {
