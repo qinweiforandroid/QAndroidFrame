@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="TabIndicator">
+    <declare-styleable name="TabLayout">
         <attr name="label_color" format="reference|color" />
         <attr name="tab_background" format="color" />
     </declare-styleable>

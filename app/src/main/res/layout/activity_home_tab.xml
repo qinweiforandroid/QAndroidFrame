@@ -13,7 +13,7 @@
 
     <include layout="@layout/layout_line_black" />
 
-    <com.qw.library.widget.tab.TabIndicator
+    <com.qw.library.widget.tab.TabLayout
         android:id="@+id/mHomeIndicator"
         android:layout_width="fill_parent"
         android:layout_height="60dp"

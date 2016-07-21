@@ -1,7 +1,6 @@
 package com.qw.frame.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
 import com.qw.frame.R;
@@ -9,15 +8,14 @@ import com.qw.frame.core.BaseViewPagerActivity;
 import com.qw.frame.fragment.MainFragment;
 import com.qw.frame.fragment.PageFragment;
 import com.qw.library.utils.Trace;
-import com.qw.library.widget.tab.Tab;
-import com.qw.library.widget.tab.TabIndicator;
+import com.qw.library.widget.tab.TabEntry;
 
 /**
  * Created by qinwei on 2016/4/6 18:21
  * email:qinwei_it@163.com
  */
-public class HomeViewPagerActivity extends BaseViewPagerActivity<Tab> implements TabIndicator.OnTabClickListener {
-    private TabIndicator generalTabIndicator;
+public class HomeViewPagerActivity extends BaseViewPagerActivity<TabEntry> implements TabLayout.OnTabClickListener {
+    private TabLayout generalTabIndicator;
     private TabLayout mTabLayout;
 
     @Override
@@ -29,16 +27,16 @@ public class HomeViewPagerActivity extends BaseViewPagerActivity<Tab> implements
     protected void initializeView() {
         super.initializeView();
         mTabLayout = (TabLayout) findViewById(R.id.mTabLayout);
-        generalTabIndicator = (TabIndicator) findViewById(R.id.generalTabIndicator);
+        generalTabIndicator = (TabLayout) findViewById(R.id.generalTabIndicator);
         generalTabIndicator.setOnTabClickListener(this);
     }
 
     @Override
     protected void initializeData(Bundle saveInstance) {
-        modules.add(new Tab("首页", R.drawable.tab_inquiry_btn, MainFragment.class));
-        modules.add(new Tab("资讯", R.drawable.tab_casehistory_btn, PageFragment.class));
-        modules.add(new Tab("发现", R.drawable.tab_community_btn, PageFragment.class));
-        modules.add(new Tab("个人", R.drawable.tab_mine_btn, PageFragment.class));
+        modules.add(new TabEntry("首页", R.drawable.tab_inquiry_btn, MainFragment.class));
+        modules.add(new TabEntry("资讯", R.drawable.tab_casehistory_btn, PageFragment.class));
+        modules.add(new TabEntry("发现", R.drawable.tab_community_btn, PageFragment.class));
+        modules.add(new TabEntry("个人", R.drawable.tab_mine_btn, PageFragment.class));
         notifyDataSetChanged();
         generalTabIndicator.initializeData(modules);
         generalTabIndicator.setCurrentTab(0);

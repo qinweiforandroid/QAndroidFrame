@@ -1,7 +1,7 @@
 package com.qw.frame.model;
 
-import com.qw.library.net.RequestManager;
 
+import com.qw.library.http.RequestManager;
 
 /**
  * Created by qinwei on 2015/12/18 16:10
@@ -38,10 +38,6 @@ public abstract class BaseModel {
         }
     }
 
-
-    public boolean canRequest(String tag) {
-        return !RequestManager.getInstance().containsTag(tag);
-    }
 
 //    @Override
 //    public boolean handleException(AppException e) {

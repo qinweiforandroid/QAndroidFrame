@@ -5,12 +5,12 @@ import android.support.v4.app.Fragment;
 
 import java.io.Serializable;
 
-public class Tab implements Serializable {
+public class TabEntry implements Serializable {
     private String label;
     private int iconRes;
     private Class<? extends Fragment> fragmentClass;
 
-    public Tab(String label, int iconRes, Class<? extends Fragment> fragmentClass) {
+    public TabEntry(String label, int iconRes, Class<? extends Fragment> fragmentClass) {
         super();
         this.label = label;
         this.iconRes = iconRes;

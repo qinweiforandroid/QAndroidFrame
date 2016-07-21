@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 /**
  */
-public class TabIndicator extends LinearLayout implements OnClickListener {
+public class TabLayout extends LinearLayout implements OnClickListener {
     private int mTabSize;
     private int mTabIndex = -1;
     private OnTabClickListener listener;
@@ -24,13 +24,13 @@ public class TabIndicator extends LinearLayout implements OnClickListener {
     private final static int ID_PREFIX = 100000;
     private ColorStateList tabColor;
 
-    public TabIndicator(Context context, AttributeSet attrs, int defStyle) {
+    public TabLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initializeView(context, attrs);
     }
 
 
-    public TabIndicator(Context context, AttributeSet attrs) {
+    public TabLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         initializeView(context, attrs);
     }
@@ -45,9 +45,9 @@ public class TabIndicator extends LinearLayout implements OnClickListener {
     }
 
     private void parseAttrs(Context context, AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabIndicator);
-        if (a.hasValue(R.styleable.TabIndicator_label_color)) {
-            this.tabColor = a.getColorStateList(R.styleable.TabIndicator_label_color);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabLayout);
+        if (a.hasValue(R.styleable.TabLayout_label_color)) {
+            this.tabColor = a.getColorStateList(R.styleable.TabLayout_label_color);
         }
     }
 
@@ -55,15 +55,15 @@ public class TabIndicator extends LinearLayout implements OnClickListener {
         this.listener = listener;
     }
 
-    public void initializeData(ArrayList<Tab> tabs) {
+    public void initializeData(ArrayList<TabEntry> tabs) {
         if (!TextUtil.isValidate(tabs)) {
             throw new IllegalArgumentException("the tabs should not be 0");
         }
         mTabSize = tabs.size();
-        TabView tab = null;
+        TabItem tab = null;
         removeAllViews();
         for (int i = 0; i < mTabSize; i++) {
-            tab = new TabView(getContext());
+            tab = new TabItem(getContext());
             tab.setId(ID_PREFIX + i);
             tab.setOnClickListener(this);
             tab.initializeData(tabs.get(i));
@@ -78,7 +78,7 @@ public class TabIndicator extends LinearLayout implements OnClickListener {
     }
 
     public void onDataChanged(int index, String number) {
-        ((TabView) (findViewById(ID_PREFIX + index))).notifyDataChanged(number);
+        ((TabItem) (findViewById(ID_PREFIX + index))).notifyDataChanged(number);
     }
 
 

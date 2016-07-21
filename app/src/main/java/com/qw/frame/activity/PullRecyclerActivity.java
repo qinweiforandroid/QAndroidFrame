@@ -15,7 +15,6 @@ import com.qw.frame.entity.Meizhi;
 import com.qw.frame.holder.PullRecyclerViewHolder;
 import com.qw.frame.model.Controller;
 import com.qw.frame.model.impl.GankModel;
-import com.qw.library.net.RequestManager;
 import com.qw.library.widget.IFooterView;
 import com.qw.library.widget.pulltorefresh.PullRecyclerView;
 import com.qw.library.widget.pulltorefresh.QBaseViewHolder;
@@ -116,7 +115,6 @@ public class PullRecyclerActivity extends BaseListActivity<Meizhi> implements Co
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RequestManager.getInstance().cancelRequest(this.toString());
     }
 
     @Override

@@ -12,8 +12,8 @@ import com.qw.frame.R;
 import com.qw.frame.core.BaseActivity;
 import com.qw.frame.fragment.PageFragment;
 import com.qw.frame.utils.Constants;
-import com.qw.library.widget.tab.Tab;
-import com.qw.library.widget.tab.TabIndicator;
+import com.qw.library.widget.tab.TabEntry;
+import com.qw.library.widget.tab.TabLayout;
 
 import java.util.ArrayList;
 
@@ -22,9 +22,9 @@ import java.util.ArrayList;
  * Created by qinwei on 2016/3/18 12:38
  * email:qinwei_it@163.com
  */
-public class HomeBottomActivity extends BaseActivity implements TabIndicator.OnTabClickListener {
-    private TabIndicator mHomeIndicator;
-    private ArrayList<Tab> tabs;
+public class HomeBottomActivity extends BaseActivity implements TabLayout.OnTabClickListener {
+    private TabLayout mHomeIndicator;
+    private ArrayList<TabEntry> tabs;
     private int currentIndex;
 
     @Override
@@ -35,17 +35,17 @@ public class HomeBottomActivity extends BaseActivity implements TabIndicator.OnT
     @Override
     protected void initializeView() {
         super.initializeView();
-        mHomeIndicator = (TabIndicator) findViewById(R.id.mHomeIndicator);
+        mHomeIndicator = (TabLayout) findViewById(R.id.mHomeIndicator);
         mHomeIndicator.setOnTabClickListener(this);
     }
 
     @Override
     protected void initializeData(Bundle saveInstance) {
         tabs = new ArrayList<>();
-        tabs.add(new Tab("首页", R.drawable.tab_inquiry_btn, PageFragment.class));
-        tabs.add(new Tab("资讯", R.drawable.tab_casehistory_btn, PageFragment.class));
-        tabs.add(new Tab("发现", R.drawable.tab_community_btn, PageFragment.class));
-        tabs.add(new Tab("个人", R.drawable.tab_mine_btn, PageFragment.class));
+        tabs.add(new TabEntry("首页", R.drawable.tab_inquiry_btn, PageFragment.class));
+        tabs.add(new TabEntry("资讯", R.drawable.tab_casehistory_btn, PageFragment.class));
+        tabs.add(new TabEntry("发现", R.drawable.tab_community_btn, PageFragment.class));
+        tabs.add(new TabEntry("个人", R.drawable.tab_mine_btn, PageFragment.class));
         if (saveInstance != null) {
             currentIndex = saveInstance.getInt(Constants.KEY_CURRENT_TAB_INDEX);
             for (int i = 0; i < tabs.size(); i++) {

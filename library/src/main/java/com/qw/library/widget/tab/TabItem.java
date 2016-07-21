@@ -11,24 +11,24 @@ import android.widget.TextView;
 import com.qw.library.R;
 
 
-public class TabView extends LinearLayout {
+public class TabItem extends LinearLayout {
 
     private ImageView mTabIconImg;
     private TextView mTabLabel;
     private ColorStateList labelColorStateList;
-    private Tab mTab;
+    private TabEntry mTab;
 
-    public TabView(Context context, AttributeSet attrs, int defStyle) {
+    public TabItem(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initializeView(context);
     }
 
-    public TabView(Context context, AttributeSet attrs) {
+    public TabItem(Context context, AttributeSet attrs) {
         super(context, attrs);
         initializeView(context);
     }
 
-    public TabView(Context context) {
+    public TabItem(Context context) {
         super(context);
         initializeView(context);
     }
@@ -39,7 +39,7 @@ public class TabView extends LinearLayout {
         mTabLabel = (TextView) findViewById(R.id.mTabLabel);
     }
 
-    public void initializeData(Tab tab) {
+    public void initializeData(TabEntry tab) {
         this.mTab = tab;
 
     }

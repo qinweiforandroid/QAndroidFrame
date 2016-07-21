@@ -1,13 +1,15 @@
 package com.qw.frame.utils;
 
-import com.qw.library.net.AbstractCallback;
-import com.qw.library.net.AppException;
-import com.qw.library.net.JsonParser;
+
+import com.qw.library.http.AbstractCallback;
+import com.qw.library.http.AppException;
+import com.qw.library.http.JsonParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -16,11 +18,12 @@ import java.lang.reflect.Type;
  * email:qinwei_it@163.com
  */
 public abstract class GankIoCallback<T> extends AbstractCallback<T> {
-    @Override
-    protected T bindData(String content) throws IOException, AppException {
+    public T convert(byte[] bfs) throws AppException {
+
         try {
-            Type type = getClass().getGenericSuperclass();
+            Type type = this.getClass().getGenericSuperclass();
             type = ((ParameterizedType) type).getActualTypeArguments()[0];
+            String content = new String(bfs, "utf-8");
             JSONObject obj = new JSONObject(content);
             boolean result = obj.getBoolean("error");
             if (result) {
@@ -30,6 +33,8 @@ public abstract class GankIoCallback<T> extends AbstractCallback<T> {
             }
         } catch (JSONException e) {
             throw new AppException(AppException.ErrorType.PARSE_JSON, e.getMessage());
+        } catch (UnsupportedEncodingException e) {
+            throw new AppException(AppException.ErrorType.CONVERT, e.getMessage());
         }
     }
 
