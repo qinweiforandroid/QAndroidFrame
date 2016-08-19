@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.qw.frame.R;
 import com.qw.frame.core.BaseActivity;
 import com.qw.library.widget.indicator.CirclePageIndicator;
+import com.qw.library.widget.loop.AutoScrollViewPager;
 import com.qw.library.widget.loop.LoopViewPager;
 
 /**
@@ -16,7 +17,7 @@ import com.qw.library.widget.loop.LoopViewPager;
  * email:qinwei_it@163.com
  */
 public class LoopViewPagerActivity extends BaseActivity {
-    private LoopViewPager mLoopViewPager;
+    private AutoScrollViewPager mLoopViewPager;
     private DataPagerAdapter adapter;
     private CirclePageIndicator mCirclePageIndicator;
 
@@ -27,8 +28,7 @@ public class LoopViewPagerActivity extends BaseActivity {
 
     @Override
     protected void initializeView() {
-        super.initializeView();
-        mLoopViewPager = (LoopViewPager) findViewById(R.id.mLoopViewPager);
+        mLoopViewPager = (AutoScrollViewPager) findViewById(R.id.mLoopViewPager);
         mCirclePageIndicator = (CirclePageIndicator) findViewById(R.id.mCirclePageIndicator);
     }
 

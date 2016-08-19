@@ -22,6 +22,11 @@ public class LoadingViewActivity extends BaseActivity implements LoadingView.OnR
     }
 
     @Override
+    protected void initializeView() {
+
+    }
+
+    @Override
     protected void initializeData(Bundle saveInstance) {
         mLoadingView = (LoadingView) findViewById(R.id.mLoadingView);
         mLoadingView.setOnRetryListener(this);

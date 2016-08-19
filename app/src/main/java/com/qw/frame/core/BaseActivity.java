@@ -35,10 +35,12 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
             protectApp();
         } else {
             setContentView();
+            initializeToolbar();
             initializeView();
             initializeData(saveInstance);
         }
     }
+
 
     public void protectApp() {
         Log.e(TAG, "protectApp:class=" + this.getClass().getSimpleName());
@@ -56,7 +58,9 @@ public abstract class BaseActivity extends AppCompatActivity implements LoadingV
     /**
      * 2. 初始化布局
      */
-    protected void initializeView() {
+    protected abstract void initializeView();
+
+    private void initializeToolbar() {
         if (findViewById(R.id.toolbar) != null) {
             toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);

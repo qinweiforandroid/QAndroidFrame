@@ -17,12 +17,17 @@ public class FragmentContentActivity extends BaseActivity {
     }
 
     @Override
+    protected void initializeView() {
+
+    }
+
+    @Override
     protected void initializeData(Bundle saveInstance) {
-       Bundle args= getIntent().getExtras();
-        Class<? extends BaseFragment> clazz= (Class<? extends BaseFragment>)args.getSerializable(Constants.KEY_FRAGMENT_CLASS);
-        if(saveInstance==null){
+        Bundle args = getIntent().getExtras();
+        Class<? extends BaseFragment> clazz = (Class<? extends BaseFragment>) args.getSerializable(Constants.KEY_FRAGMENT_CLASS);
+        if (saveInstance == null) {
             try {
-                getSupportFragmentManager().beginTransaction().replace(R.id.generalContent,clazz.newInstance()).commitAllowingStateLoss();
+                getSupportFragmentManager().beginTransaction().replace(R.id.generalContent, clazz.newInstance()).commitAllowingStateLoss();
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {

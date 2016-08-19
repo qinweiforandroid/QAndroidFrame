@@ -20,7 +20,6 @@ public abstract class BaseViewPagerActivity<T> extends BaseActivity implements V
 
     @Override
     protected void initializeView() {
-        super.initializeView();
         mViewPager = (ViewPager) findViewById(R.id.generalViewPager);
         mViewPager.addOnPageChangeListener(this);
         mViewPager.setOffscreenPageLimit(4);

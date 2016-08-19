@@ -1,6 +1,7 @@
 package com.qw.frame.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
 import com.qw.frame.R;
@@ -14,8 +15,8 @@ import com.qw.library.widget.tab.TabEntry;
  * Created by qinwei on 2016/4/6 18:21
  * email:qinwei_it@163.com
  */
-public class HomeViewPagerActivity extends BaseViewPagerActivity<TabEntry> implements TabLayout.OnTabClickListener {
-    private TabLayout generalTabIndicator;
+public class HomeViewPagerActivity extends BaseViewPagerActivity<TabEntry> implements com.qw.library.widget.tab.TabLayout.OnTabClickListener {
+    private com.qw.library.widget.tab.TabLayout generalTabIndicator;
     private TabLayout mTabLayout;
 
     @Override
@@ -27,7 +28,7 @@ public class HomeViewPagerActivity extends BaseViewPagerActivity<TabEntry> imple
     protected void initializeView() {
         super.initializeView();
         mTabLayout = (TabLayout) findViewById(R.id.mTabLayout);
-        generalTabIndicator = (TabLayout) findViewById(R.id.generalTabIndicator);
+        generalTabIndicator = (com.qw.library.widget.tab.TabLayout) findViewById(R.id.generalTabIndicator);
         generalTabIndicator.setOnTabClickListener(this);
     }
 

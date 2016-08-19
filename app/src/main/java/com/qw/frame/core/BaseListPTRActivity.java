@@ -7,26 +7,40 @@ import android.view.ViewGroup;
 
 import com.qw.frame.R;
 import com.qw.library.widget.pulltorefresh.BaseListAdapter;
-import com.qw.library.widget.pulltorefresh.layout.ILayoutManager;
 import com.qw.library.widget.pulltorefresh.PullRecyclerView;
+import com.qw.library.widget.pulltorefresh.PullRecyclerViewPTR;
 import com.qw.library.widget.pulltorefresh.QBaseViewHolder;
+import com.qw.library.widget.pulltorefresh.layout.ILayoutManager;
 import com.qw.library.widget.pulltorefresh.layout.MLinearLayoutManager;
 
 import java.util.ArrayList;
+
+import in.srain.cube.views.ptr.PtrClassicDefaultHeader;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 
 /**
  * Created by qinwei on 2015/10/26 13:51
  * email:qinwei_it@163.com
  */
-public abstract class BaseListActivity<T> extends BaseActivity implements PullRecyclerView.OnPullRecyclerListener {
+public abstract class BaseListPTRActivity<T> extends BaseActivity implements PullRecyclerViewPTR.OnPullRecyclerListener {
     protected ArrayList<T> modules = new ArrayList<>();
-    protected PullRecyclerView mPullRecycler;
+    protected PullRecyclerViewPTR mPullRecycler;
     protected BaseListAdapter adapter;
 
     @Override
     protected void initializeView() {
-        mPullRecycler = (PullRecyclerView) findViewById(R.id.mPullRecyclerView);
+        mPullRecycler = (PullRecyclerViewPTR) findViewById(R.id.mPullRecyclerView);
+        mPullRecycler.mPtrFrameLayout.setResistance(1.7f);//阻尼
+        mPullRecycler.mPtrFrameLayout.setRatioOfHeaderHeightToRefresh(1.2f);
+        mPullRecycler.mPtrFrameLayout.setDurationToClose(200);
+        mPullRecycler.mPtrFrameLayout.setDurationToCloseHeader(500);
+        // default is false
+        mPullRecycler.mPtrFrameLayout.setPullToRefresh(false);
+        // default is true
+        mPullRecycler.mPtrFrameLayout.setKeepHeaderWhenRefresh(true);
+        addRefreshHeaderView(mPullRecycler.mPtrFrameLayout);
+
         mPullRecycler.setOnPullRecyclerListener(this);
         mPullRecycler.setPullToRefreshEnabled(isPullToRefreshEnabled());
         mPullRecycler.setLoadMoreEnabled(isLoadMoreEnabled());
@@ -37,12 +51,19 @@ public abstract class BaseListActivity<T> extends BaseActivity implements PullRe
         mPullRecycler.setAdapter(adapter);
     }
 
+    protected void addRefreshHeaderView(PtrFrameLayout mPtrFrameLayout) {
+        PtrClassicDefaultHeader ptrMyDefaultHeaderBlack = new PtrClassicDefaultHeader(this);
+        mPtrFrameLayout.setHeaderView(ptrMyDefaultHeaderBlack);
+        mPtrFrameLayout.addPtrUIHandler(ptrMyDefaultHeaderBlack);
+    }
+
+
     public void setLayoutManager(ILayoutManager manager) {
         mPullRecycler.setLayoutManager(manager);
     }
 
     @Override
-    public void onRefresh(PullRecyclerView.State state) {
+    public void onRefresh(PullRecyclerViewPTR.State state) {
 
     }
 
@@ -76,20 +97,24 @@ public abstract class BaseListActivity<T> extends BaseActivity implements PullRe
 
         @Override
         public QBaseViewHolder onCreateAdapterView(ViewGroup parent, int viewType) {
-            return BaseListActivity.this.onCreateAdapterView(LayoutInflater.from(BaseListActivity.this), parent, viewType);
+            return BaseListPTRActivity.this.onCreateAdapterView(LayoutInflater.from(BaseListPTRActivity.this), parent, viewType);
         }
 
         @Override
         protected int getAdapterItemViewType(int position) {
-            return BaseListActivity.this.getAdapterItemViewType(position);
+            return BaseListPTRActivity.this.getAdapterItemViewType(position);
         }
 
         @Override
         protected void onRetryLoadMore() {
-            onRefresh(PullRecyclerView.State.PULL_TO_END);
+            onRefresh(PullRecyclerViewPTR.State.PULL_TO_END);
+
         }
     }
 
+    protected void onRetryLoadMore() {
+
+    }
 
     protected abstract QBaseViewHolder onCreateAdapterView(LayoutInflater from, ViewGroup parent, int viewType);
 

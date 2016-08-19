@@ -39,7 +39,6 @@ public class CheeseDetailActivity extends BaseActivity {
 
     @Override
     protected void initializeView() {
-        super.initializeView();
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle("123123123123");

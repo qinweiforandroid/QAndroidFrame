@@ -34,7 +34,6 @@ public class HomeBottomActivity extends BaseActivity implements TabLayout.OnTabC
 
     @Override
     protected void initializeView() {
-        super.initializeView();
         mHomeIndicator = (TabLayout) findViewById(R.id.mHomeIndicator);
         mHomeIndicator.setOnTabClickListener(this);
     }

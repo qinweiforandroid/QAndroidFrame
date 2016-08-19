@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.qw.library.widget.loop.LoopViewPager
+    <com.qw.library.widget.loop.AutoScrollViewPager
         android:id="@+id/mLoopViewPager"
         android:background="@color/colorAccent"
         android:layout_width="match_parent"
