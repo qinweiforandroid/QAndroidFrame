@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import com.qw.frame.R;
 import com.qw.library.widget.pulltorefresh.BaseListAdapter;
-import com.qw.library.widget.pulltorefresh.PullRecyclerView;
 import com.qw.library.widget.pulltorefresh.PullRecyclerViewPTR;
 import com.qw.library.widget.pulltorefresh.QBaseViewHolder;
 import com.qw.library.widget.pulltorefresh.layout.ILayoutManager;
@@ -107,8 +106,7 @@ public abstract class BaseListPTRActivity<T> extends BaseActivity implements Pul
 
         @Override
         protected void onRetryLoadMore() {
-            onRefresh(PullRecyclerViewPTR.State.PULL_TO_END);
-
+            onRetryLoadMore();
         }
     }
 

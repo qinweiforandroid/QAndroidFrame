@@ -1,6 +1,5 @@
 package com.qw.frame.fragment;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,8 +22,8 @@ public class TitleFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     protected void initializeView(View v) {
-        mTextView=(TextView)v.findViewById(R.id.mTextView);
-        mButton=(Button)v.findViewById(R.id.mButton);
+        mTextView = (TextView) v.findViewById(R.id.mTextView);
+        mButton = (Button) v.findViewById(R.id.mButton);
         mButton.setOnClickListener(this);
     }
 
@@ -36,6 +35,6 @@ public class TitleFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        mTextView.setText(mTextView.getText().toString()+" ME TOO");
+        mTextView.setText(mTextView.getText().toString() + " ME TOO");
     }
 }

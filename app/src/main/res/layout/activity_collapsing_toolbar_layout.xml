@@ -52,28 +52,8 @@
             android:fillViewport="false"
             app:layout_scrollFlags="scroll"
             app:tabIndicatorColor="@color/colorAccent"
-            app:tabMode="fixed">
+            app:tabMode="fixed"/>
 
-            <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="分享" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="收藏" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="关注" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="关注者" />
-        </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 
 

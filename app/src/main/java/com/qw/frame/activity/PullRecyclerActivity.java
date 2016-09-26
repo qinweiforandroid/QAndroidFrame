@@ -45,7 +45,7 @@ public class PullRecyclerActivity extends BaseListActivity<Meizhi> implements Co
     protected void initializeData(Bundle saveInstance) {
         setTitle("RecyclerRefreshView");
         mPullRecycler.setRefreshing();
-        model=new GankModel();
+        model = new GankModel();
         model.setController(this);
 //        setLayoutManager(new MStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
     }
@@ -60,7 +60,7 @@ public class PullRecyclerActivity extends BaseListActivity<Meizhi> implements Co
 
     @Override
     protected QBaseViewHolder onCreateAdapterView(LayoutInflater from, ViewGroup parent, int viewType) {
-        QBaseViewHolder holder = new PullRecyclerViewHolder(LayoutInflater.from(this).inflate(R.layout.activity_pullrecyclerview_item, null));
+        QBaseViewHolder holder = new PullRecyclerViewHolder(LayoutInflater.from(this).inflate(R.layout.activity_pullrecyclerview_item, null), this);
         return holder;
     }
 
@@ -119,7 +119,7 @@ public class PullRecyclerActivity extends BaseListActivity<Meizhi> implements Co
 
     @Override
     public void onSuccess(String action) {
-        if (pageNum!=1) {
+        if (pageNum != 1) {
             if (model.meizhis.size() < 20) {
                 adapter.notifyLoadMoreStateChanged(IFooterView.State.no_data);
             } else {
@@ -137,7 +137,7 @@ public class PullRecyclerActivity extends BaseListActivity<Meizhi> implements Co
     @Override
     public void onFailure(String action, int errorCode, String errorMsg) {
         mPullRecycler.onRefreshCompleted();
-        if (pageNum!=1) {
+        if (pageNum != 1) {
             adapter.notifyLoadMoreStateChanged(IFooterView.State.error);
         }
     }

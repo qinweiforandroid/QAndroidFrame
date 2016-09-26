@@ -2,15 +2,12 @@ package com.qw.frame.core;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.qw.frame.R;
-import com.qw.library.utils.Trace;
 import com.qw.library.widget.LoadingView;
 
 
@@ -21,23 +18,25 @@ import com.qw.library.widget.LoadingView;
  * @version 1.0
  * @created 创建时间: 2015-8-22 下午7:07:47
  */
-public abstract class BaseFragment extends Fragment implements LoadingView.OnRetryListener {
-    private  final String TAG=getClass().getSimpleName();
+public abstract class BaseFragment extends Fragment implements IFragment, LoadingView.OnRetryListener {
+    private final String TAG = getClass().getSimpleName();
     public static final String KEY_IS_BIND_VIEWPAGER = "key_is_bind_viewpager";
     protected LoadingView mLoadingView;
     private boolean isFirstLoad = true;
     private boolean isOnViewCreated = false;
     private boolean isBindViewPager;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         trace("onAttach");
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isFirstLoad=true;
-        trace("onCreate "+(savedInstanceState==null));
+        isFirstLoad = true;
+        trace("onCreate " + (savedInstanceState == null));
         if (getArguments() != null)
             initializeArguments(getArguments());
     }
@@ -84,7 +83,6 @@ public abstract class BaseFragment extends Fragment implements LoadingView.OnRet
             initializeData();
         }
     }
-
 
 
     @Override
@@ -138,11 +136,27 @@ public abstract class BaseFragment extends Fragment implements LoadingView.OnRet
         trace("onDestroy");
     }
 
-    private void trace(String msg){
+    private void trace(String msg) {
 //        Trace.d(TAG+":"+msg);
     }
+
     @Override
     public void onRetry() {
         mLoadingView.notifyDataChanged(LoadingView.State.ing);
+    }
+
+    @Override
+    public void onMenuClick() {
+
+    }
+
+    @Override
+    public void onFragmentRefresh() {
+
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+
     }
 }
