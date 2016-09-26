@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import com.qw.frame.R;
 import com.qw.frame.core.BaseActivity;
 import com.qw.frame.fragment.AnimationFragment;
+import com.qw.frame.fragment.ListFragment;
+import com.qw.frame.fragment.MainFragment;
 import com.qw.frame.fragment.PageFragment;
 import com.qw.frame.utils.Constants;
 import com.qw.library.widget.tab.TabEntry;
@@ -43,8 +45,8 @@ public class HomeBottomActivity extends BaseActivity implements TabLayout.OnTabC
     protected void initializeData(Bundle saveInstance) {
         tabs = new ArrayList<>();
         tabs.add(new TabEntry("首页", R.drawable.tab_inquiry_btn, PageFragment.class));
-        tabs.add(new TabEntry("资讯", R.drawable.tab_casehistory_btn, PageFragment.class));
-        tabs.add(new TabEntry("发现", R.drawable.tab_community_btn, PageFragment.class));
+        tabs.add(new TabEntry("资讯", R.drawable.tab_casehistory_btn, ListFragment.class));
+        tabs.add(new TabEntry("发现", R.drawable.tab_community_btn, MainFragment.class));
         tabs.add(new TabEntry("个人", R.drawable.tab_mine_btn, AnimationFragment.class));
         if (saveInstance != null) {
             currentIndex = saveInstance.getInt(Constants.KEY_CURRENT_TAB_INDEX);
@@ -75,6 +77,9 @@ public class HomeBottomActivity extends BaseActivity implements TabLayout.OnTabC
             Fragment from = fm.findFragmentByTag("" + currentIndex);
             FragmentTransaction ft = fm.beginTransaction();
             if (to == null) {
+                if (from != null) {
+                    ft.hide(from);
+                }
                 to = tabs.get(index).getFragmentClass().newInstance();
                 ft.add(R.id.mHomeContent, to, "" + index).commit();
             } else {

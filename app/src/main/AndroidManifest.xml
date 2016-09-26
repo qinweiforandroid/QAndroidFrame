@@ -25,8 +25,12 @@
             android:name=".activity.HomeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.HomeBottomActivity" />
-        <activity android:name=".activity.HomeViewPagerActivity" />
+        <activity
+            android:name=".activity.HomeBottomActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HomeViewPagerActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.PullRecyclerActivity"
             android:screenOrientation="portrait" />
